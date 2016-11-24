@@ -3386,7 +3386,7 @@ public class ST extends JFrame implements ActionListener
 			   cf = null;
 		       }
 
-		       if  ((thefDataSetfmnel.tga.szGoFile != null)&&
+		       if  ((thefDataSetfmnel.tga.szGoFile != null)&&(szBatchGOoutput ==null)&&
 			   (!thefDataSetfmnel.tga.szGoFile.equals("")))
 		      {
 		         String szTitle ="GO Results";
@@ -4098,7 +4098,7 @@ public class ST extends JFrame implements ActionListener
        }
        else if (esource == infoButton)
        {
-           String szMessage = "This is version 1.3.9 of the Short Time-series Expression Miner (STEM).\n\n"+
+           String szMessage = "This is version 1.3.10 of the Short Time-series Expression Miner (STEM).\n\n"+
                        "The Short Time-series Expression Miner (STEM) was developed by Jason Ernst, "+
                        "Dima Patek, and Ziv Bar-Joseph. " +
                        "Any questions or bugs found should "+
