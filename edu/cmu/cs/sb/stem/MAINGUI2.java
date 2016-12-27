@@ -1599,15 +1599,16 @@ public class MAINGUI2 extends PFrame implements ActionListener
                    {
                       if (event.getButton() == MouseEvent.BUTTON1)
                       {                             
-                         javax.swing.SwingUtilities.invokeLater(new Runnable() 
+			 javax.swing.SwingUtilities.invokeLater(new Runnable() 
                          {
                             public void run() 
                             {
-                               ProfileGui pg;
+                               final ProfileGui pg;
 
 			       pg = new ProfileGui(theDataSet,profilelookup[nprofilef],ranklookup,
 							 null,-1,null,null,null,thegeneplotpanel,cf);
 
+			       
 			       openProfiles.add(pg);
                                pg.addWindowListener(new WindowAdapter()
                                {
@@ -1618,14 +1619,23 @@ public class MAINGUI2 extends PFrame implements ActionListener
 				     {
                                         openProfiles.remove(nindexremove);
 				     }
+				     pg.dispose();
 				  }
-			       });
 
+				   public void windowOpened(WindowEvent we)
+				   {
+				       pg.repaint();
+				   }
+			       });
+			       
                                pg.setLocation(20,50);        
-                               pg.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                               //pg.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //removed from 1.3.11
+
                                pg.pack();
                                pg.setSize(new Dimension(SCREENWIDTH,SCREENHEIGHT));
 			       pg.setVisible(true);
+
+
 			    }
 	                 });
 		      }
@@ -1636,10 +1646,13 @@ public class MAINGUI2 extends PFrame implements ActionListener
            }
 	      
 	   bsaveprofile = false;
+
+	   
            for (int nindex = 0; nindex < openProfiles.size(); nindex++)
 	   {
 	       ((ProfileGui) openProfiles.get(nindex)).repaint();
 	   }
+	   
 	       
            if (thecomparegui != null)
 	   {

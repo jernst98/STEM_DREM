@@ -16,7 +16,7 @@ import java.text.*;
 /**
  * Class for interface display for all the genes assigned to the same profile 
  */
-public class ProfileGui extends JFrame implements MouseListener, ComponentListener
+public class ProfileGui extends Frame implements MouseListener, ComponentListener
 {
 
     Object sizeLock = new Object();
@@ -201,10 +201,11 @@ public class ProfileGui extends JFrame implements MouseListener, ComponentListen
     }
 
     /**
-     * Empty method
+     * repaints
      */
     public void componentShown(ComponentEvent e)  
     {
+	repaint();
     }
 
     /**
@@ -887,7 +888,6 @@ public class ProfileGui extends JFrame implements MouseListener, ComponentListen
                                 double[][] genevalues,int[][] missing,ArrayList[] bestAssignments,
 			       double[] profilevals, boolean[] sig, ArrayList currProfileAssignments)
     {
-         
 	g2.setColor(Color.white);
 	synchronized (sizeLock)
 	{

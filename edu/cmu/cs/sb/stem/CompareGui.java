@@ -429,11 +429,25 @@ public class CompareGui extends PFrame
               {
                  if (event.getButton() == MouseEvent.BUTTON1)
                  {                         
-                    ProfileGui pg;
+                    final ProfileGui pg;
 		    pg = new ProfileGui(rowset,cir.nprofile,null,null,-1,null,null,null,rowplotpanel,cf);
 
+
+		    pg.addWindowListener(new WindowAdapter()
+		    {
+		       public void windowClosing(WindowEvent we)
+		       {
+			  pg.dispose();
+		       }
+
+		       public void windowOpened(WindowEvent we)
+		       {
+			   pg.repaint();
+		       }
+		    });
+
 		    pg.setLocation(20,50);        
-		    pg.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		    //pg.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  //removed for 1.3.11
 		    pg.setSize(new Dimension(SCREENWIDTH,SCREENHEIGHT));
 		    pg.setVisible(true);           
 		 }
@@ -499,11 +513,25 @@ public class CompareGui extends PFrame
                        {
                           public void run() 
                           {                
-                             ProfileGui pg;
+                             final ProfileGui pg;
 			     pg = new ProfileGui(colset ,cirec.nprofile,null,
 						 cirec.inames,cir.nprofile,szIntersect,null,null,colplotpanel,cf); 
+
+			     pg.addWindowListener(new WindowAdapter()
+			     {
+			        public void windowClosing(WindowEvent we)
+			        {
+			           pg.dispose();
+			        }
+
+				public void windowOpened(WindowEvent we)
+				{
+			           pg.repaint();
+			        }
+			     });
+
                              pg.setLocation(20,50);        
-                             pg.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                             //pg.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  //removed from 1.3.11
                              pg.setSize(new Dimension(SCREENWIDTH,SCREENHEIGHT));
 			     pg.setVisible(true);   
 			  }

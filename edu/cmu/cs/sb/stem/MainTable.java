@@ -182,11 +182,23 @@ public class MainTable extends JPanel implements ActionListener
 		          {
 			     int nprofile = Integer.parseInt(stprofile.nextToken());
                     
-                             ProfileGui pg = 
+                             final ProfileGui pg = 
 				 new ProfileGui(finaltheDataSet,nprofile,null,
 						null,-1,null,szgene,szspot, thegeneplotpanel,cf);        
 
-			       pg.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			      pg.addWindowListener(new WindowAdapter()
+			      {
+			         public void windowClosing(WindowEvent we)
+				 {
+				    pg.dispose();
+			         }
+
+			         public void windowOpened(WindowEvent we)
+			         {
+				    pg.repaint();
+				 }
+			       });
+			       //pg.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  //removed from 1.3.11
 			       pg.pack();
 			       pg.setSize(new Dimension(MAINGUI2.SCREENWIDTH,MAINGUI2.SCREENHEIGHT));
 			       pg.setVisible(true);
