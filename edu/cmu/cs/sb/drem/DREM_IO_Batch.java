@@ -102,7 +102,7 @@ public class DREM_IO_Batch {
 	int nKeyInputTypeDEF = 1;
 	double dKeyInputXDEF = 3;
 	String SZSTATICDIR = "TFInput";
-	String szGeneOntologyFileDEF = "gene_ontology.obo";
+        String szGeneOntologyFileDEF = "go-basic.obo";// "gene_ontology.obo";
 	double dnodekDEF = 1;
 
 	// SDREM

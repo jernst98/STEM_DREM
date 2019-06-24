@@ -1449,11 +1449,11 @@ public class DREMGui extends PFrame implements ComponentListener {
 			siginButton.addChild(siginText);
 
 			nheight = getHeight();
-			int ninset = 10;
+			int ninset = 9;//10;
 			int nspacing = ninset + BUTTONRECWIDTH;
 
 			nwidth = getWidth();
-			INITLEFT = nwidth / 2.0 - 3 * nspacing;
+			INITLEFT = nwidth / 2.0 - 3 * nspacing-3;
 			helpButton = new PImage(Util.getImageURL("Help24.gif"));
 			PImage saveButton = new PImage(Util.getImageURL("Save24.gif"));
 

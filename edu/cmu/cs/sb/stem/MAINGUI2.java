@@ -654,7 +654,7 @@ public class MAINGUI2 extends PFrame implements ActionListener
 	   int EXTRASPACE = 5;
 
            PNode allButton = PPath.createRectangle((float) 0.0,(float) 0.0,(float) frecwidth,(float) 18.0);
-           allButton.translate(2*(SCREENWIDTH/7+EXTRASPACE)-OFFSET,SCREENHEIGHT-65);
+           allButton.translate(2*(SCREENWIDTH/7+EXTRASPACE)-OFFSET,SCREENHEIGHT-80);
            PText theText = new PText("Main Gene Table");
            theText.setFont(new Font("times",Font.PLAIN,12));
            theText.translate(10,2);
@@ -662,7 +662,7 @@ public class MAINGUI2 extends PFrame implements ActionListener
            allButton.addChild(theText);    
 
            PNode filteredButton = PPath.createRectangle((float) 0.0,(float) 0.0,(float) frecwidth,(float) 18.0);
-           filteredButton.translate(SCREENWIDTH/7+EXTRASPACE-OFFSET,SCREENHEIGHT-65);
+           filteredButton.translate(SCREENWIDTH/7+EXTRASPACE-OFFSET,SCREENHEIGHT-80);
            PText thefilteredText = new PText("Filtered Gene List");
            thefilteredText.setFont(new Font("times",Font.PLAIN,12));
            thefilteredText.translate(8,2);
@@ -671,7 +671,7 @@ public class MAINGUI2 extends PFrame implements ActionListener
 	   canvas.getLayer().addChild(filteredButton);     
 
            PNode geneplotButton = PPath.createRectangle((float) 0.0,(float) 0.0,(float) frecwidth,(float) 18.0);
-           geneplotButton.translate(3*(SCREENWIDTH/7+EXTRASPACE)-OFFSET,SCREENHEIGHT-65);
+           geneplotButton.translate(3*(SCREENWIDTH/7+EXTRASPACE)-OFFSET,SCREENHEIGHT-80);
            PText thegeneText = new PText("Interface Options...");
            thegeneText.setFont(new Font("times",Font.PLAIN,12));
            thegeneText.translate(6,2);
@@ -680,7 +680,7 @@ public class MAINGUI2 extends PFrame implements ActionListener
 	   canvas.getLayer().addChild(geneplotButton); 
 
            PNode sortButton = PPath.createRectangle((float) 0.0,(float) 0.0,(float) frecwidth,(float) 18.0);
-           sortButton.translate(4*(SCREENWIDTH/7+EXTRASPACE)-OFFSET,SCREENHEIGHT-65);
+           sortButton.translate(4*(SCREENWIDTH/7+EXTRASPACE)-OFFSET,SCREENHEIGHT-80);
            PText thesortText;
 	   if (theDataSet.bkmeans)
 	   {
@@ -703,7 +703,7 @@ public class MAINGUI2 extends PFrame implements ActionListener
 	   if (!theDataSet.bkmeans)
 	   {
               PNode sortClusterButton = PPath.createRectangle((float) 0.0,(float) 0.0,(float) frecwidth,(float) 18.0);
-              sortClusterButton.translate(5*(SCREENWIDTH/7+EXTRASPACE)-OFFSET,SCREENHEIGHT-65);
+              sortClusterButton.translate(5*(SCREENWIDTH/7+EXTRASPACE)-OFFSET,SCREENHEIGHT-80);
               PText thesortClusterText = new PText("Order Clusters By...");
               thesortClusterText.setFont(new Font("times",Font.PLAIN,12));
               thesortClusterText.translate(2,2);
@@ -752,15 +752,15 @@ public class MAINGUI2 extends PFrame implements ActionListener
 
 	   if (theDataSet.bkmeans)
 	   {
-	       compareButton.translate(5*(SCREENWIDTH/7+EXTRASPACE)-OFFSET,SCREENHEIGHT-65);
-	       saveButton.translate(5*(SCREENWIDTH/7+EXTRASPACE)+20,SCREENHEIGHT-68);
-	       helpButton.translate(5*(SCREENWIDTH/7+EXTRASPACE)+50,SCREENHEIGHT-68);
+	       compareButton.translate(5*(SCREENWIDTH/7+EXTRASPACE)-OFFSET,SCREENHEIGHT-80);
+	       saveButton.translate(5*(SCREENWIDTH/7+EXTRASPACE)+16,SCREENHEIGHT-83);
+	       helpButton.translate(5*(SCREENWIDTH/7+EXTRASPACE)+41,SCREENHEIGHT-83);
 	   }
 	   else
 	   {
-	       compareButton.translate(6*(SCREENWIDTH/7+EXTRASPACE)-OFFSET,SCREENHEIGHT-65);
-	       saveButton.translate(6*(SCREENWIDTH/7+EXTRASPACE)+20,SCREENHEIGHT-68);
-	       helpButton.translate(6*(SCREENWIDTH/7+EXTRASPACE)+50,SCREENHEIGHT-68);
+	       compareButton.translate(6*(SCREENWIDTH/7+EXTRASPACE)-OFFSET,SCREENHEIGHT-80);
+	       saveButton.translate(6*(SCREENWIDTH/7+EXTRASPACE)+16,SCREENHEIGHT-83);
+	       helpButton.translate(6*(SCREENWIDTH/7+EXTRASPACE)+41,SCREENHEIGHT-83);
 	   }
 	   canvas.getLayer().addChild(helpButton);
 	   canvas.getLayer().addChild(saveButton);

@@ -13,7 +13,7 @@ import java.text.*;
  */
 public class GoAnnotations {
 
-	public static String SZGP = "gene_association.";
+        public static String SZGP = "";//"gene_association.";
 
 	//only user prvided cross reference files are supported
 	public static String[] defaultxrefs = { "User provided",
@@ -23,7 +23,7 @@ public class GoAnnotations {
 			"User provided",
 			"No annotations",
 			//"Anaplasma phagocytophilum HZ (JCVI)",
-			//"Agrobacterium tumefaciensstr. C58 (PAMGO)",// new atumefaciens
+			"Agrobacterium tumefaciensstr. C58 (PAMGO)",// new atumefaciens
 			"Arabidopsis (EBI)",
 			"Arabidopsis thaliana (TAIR)",
 			"Aspergillus nidulans (AspGD)",// new aspgd.gz
@@ -40,9 +40,9 @@ public class GoAnnotations {
 			//"Coxiella burnetti RSA (JCVI)",
 			"Danio rerio (ZFIN)",
 			//"Dehalococcoides ethenogenes 195 (JCVI)",
+			"Dickeya dadantii (PAMGO)", // added version 1.3.7
 			"Dictyostelim discoideum (DictyBase)",// now dictyBase.gz
 			"Dog (EBI)",//new DOG EBI
-			"Dickeya dadantii (PAMGO)", // added version 1.3.7
 
 			"Drosophila melanogaster (FlyBase)",
 			//"Ehrlichia chaffeensis Arkansas (JCVI)",
@@ -95,10 +95,10 @@ public class GoAnnotations {
        public static String[] xreforgfile = { //"",
 	   // "", 
 	   //"", 
-	   //              "",
-			"", "", "", "", "", "", "", "",
+	                "",
+	   "", "", "", "", "", "", "", "",
 			"", "", "", "", "", "", "", "", "", "",
-			"", "", "", "",
+	   "", "", "", "",
 			"",// removed 7/5/09 human xrefs no longer
 				// supported"human.xrefs.gz",
 			"", "", "", "", "", "", "", "", "", "", "", "", "",
@@ -112,58 +112,58 @@ public class GoAnnotations {
 			"",
 			"",
 			//SZGP + "jcvi_Aphagocytophilum.gz",
-			//SZGP + "PAMGO_Atumefaciens.gz",// new
+			SZGP + "pamgo_atumefaciens.gaf.gz",// new
 			"goa_arabidopsis.gaf.gz",
-			SZGP + "tair.gz",
-			SZGP + "aspgd.gz",// new
+			SZGP + "tair.gaf.gz",
+			SZGP + "aspgd.gaf.gz",// new
 			//SZGP + "jcvi_Banthracis.gz",
-			SZGP + "wb.gz",
+			SZGP + "wb.gaf.gz",
 			//SZGP + "jcvi_Cjejuni.gz",
-			SZGP + "cgd.gz",
+			SZGP + "cgd.gaf.gz",
 			//SZGP + "jcvi_Chydrogenoformans.gz",
 			"goa_chicken.gaf.gz",
-			SZGP+"jcvi.gz",
+			SZGP+"jcvi.gaf.gz",
 			//SZGP + "jcvi_Cperfringens.gz", // new
 			//SZGP + "jcvi_Cpsychrerythraea.gz", // new
 			"goa_cow.gaf.gz",
 			//SZGP + "jcvi_Cburnetii.gz",
-			SZGP + "zfin.gz",
+			SZGP + "zfin.gaf.gz",
 			//SZGP + "jcvi_Dethenogenes.gz",
-			SZGP + "dictyBase.gz",// new SZGP+"ddb.gz",
+			SZGP + "pamgo_ddadantii.gaf.gz",
+			SZGP + "dictybase.gaf.gz",// new SZGP+"ddb.gz",
 			"goa_dog.gaf.gz",
-			SZGP + "PAMGO_Ddadantii.gz",
-			SZGP + "fb.gz",
+			SZGP + "fb.gaf.gz",
 			//SZGP + "jcvi_Echaffeensis.gz",
-			SZGP + "ecocyc.gz", // new
+			SZGP + "ecocyc.gaf.gz", // new
 			"goa_fly.gaf.gz",//new
 			//SZGP + "jcvi_Gsulfurreducens.gz",
 			// SZGP+"GeneDB_tsetse.gz",
 			"goa_human.gaf.gz",
 			//SZGP + "jcvi_Hneptunium.gz",// new
-			SZGP + "GeneDB_Lmajor.gz",
+			SZGP + "genedb_lmajor.gaf.gz",
 			//SZGP + "jcvi_Lmonocytogenes.gz",
-			SZGP + "PAMGO_Mgrisea.gz",// new
+			SZGP + "pamgo_mgrisea.gaf.gz",// new
 			//SZGP + "jcvi_Mcapsulatus.gz",
 			"goa_mouse.gaf.gz",
-			SZGP + "mgi.gz",
+			SZGP + "mgi.gaf.gz",
 			//SZGP + "jcvi_Nsennetsu.gz",
-			SZGP + "PAMGO_Oomycetes.gz",// new
-			SZGP + "gramene_oryza.gz",
+			SZGP + "pamgo_oomycetes.gaf.gz",// new
+			SZGP + "gramene_oryza.gaf.gz",
 			"goa_pdb.gaf.gz",
 			"goa_pig.gaf.gz",
-			SZGP + "GeneDB_Pfalciparum.gz",
-			SZGP + "pseudocap.gz",
+			SZGP + "genedb_pfalciparum.gaf.gz",
+			SZGP + "pseudocap.gaf.gz",
 			//SZGP + "jcvi_Pfluorescens.gz",// new
 			//SZGP + "jcvi_Psyringae.gz",
 			//SZGP + "jcvi_Psyringae_phaseolicola.gz",// new
 		        "goa_rat.gaf.gz",
-			SZGP + "rgd.gz",
-			SZGP + "reactome.gz",// new
-			SZGP + "sgd.gz", 
-                        SZGP + "pombase.gz",//updated from "GeneDB_Spombe.gz",
+			SZGP + "rgd.gaf.gz",
+			SZGP + "reactome.gaf.gz",// new
+			SZGP + "sgd.gaf.gz", 
+                        SZGP + "pombase.gaf.gz",//updated from "GeneDB_Spombe.gz",
 			//SZGP + "jcvi_Soneidensis.gz", SZGP + "jcvi_Spomeroyi.gz",
-			SZGP + "sgn.gz",// new
-			SZGP + "GeneDB_Tbrucei.gz",
+			SZGP + "sgn.gaf.gz",// new
+			SZGP + "genedb_tbrucei.gaf.gz",
 			// SZGP+"tigr_Tbrucei_chr2.gz",
 			//"goa_uniprot_all.gaf.gz",
 			"goa_worm.gaf.gz",

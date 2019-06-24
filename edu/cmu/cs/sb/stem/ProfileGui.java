@@ -56,7 +56,7 @@ public class ProfileGui extends Frame implements MouseListener, ComponentListene
     int SCREENHEIGHT = MAINGUI2.SCREENHEIGHT;
     static int SPACETOP = 70;
     static int SPACEBOT2 =20;
-    static int SPACEBOT = 50;
+    static int SPACEBOT = 70;
     static int SPACELEFT = 40;
     static int SPACERIGHT = 40;
     //800-80=720/2=360+40
@@ -1056,7 +1056,7 @@ public class ProfileGui extends Frame implements MouseListener, ComponentListene
         FontMetrics fm = g2.getFontMetrics();
         Rectangle2D bounds = fm.getStringBounds(szTitleString,g2);
         int nwid = (int) Math.ceil(bounds.getMaxX());
-        g2.drawString(szTitleString, SCREENWIDTH/2-nwid/2, 50);
+        g2.drawString(szTitleString, SCREENWIDTH/2-nwid/2, 55);
 
 	String szSecondLine;
 	if (theDataSet.bkmeans)

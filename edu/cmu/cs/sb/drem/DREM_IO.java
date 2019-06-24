@@ -144,7 +144,7 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 	static int nKeyInputTypeDEF = 1;
 	static double dKeyInputXDEF = 3;
 	static String SZSTATICDIR = "TFInput";
-	static String szGeneOntologyFileDEF = "gene_ontology.obo";
+        static String szGeneOntologyFileDEF = "go-basic.obo";//"gene_ontology.obo";
 	static double dnodekDEF = 1;
 	
 	// SDREM
@@ -2811,7 +2811,7 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 			};
 			(new Thread(clusterrun)).start();
 		} else if (esource == infoButton) {
-			String szMessage = "This is version 2.0.3 of the Dynamic Regulatory Events Miner (DREM).\n\n"
+			String szMessage = "This is version 2.0.4 of the Dynamic Regulatory Events Miner (DREM).\n\n"
 					+ "The Dynamic Regulatory Events Miner (DREM) was developed by Jason Ernst "
 					+ "in collaboration with Ziv Bar-Joseph and extended by William E. Devanny, Anthony Gitter and Marcel H. Schulz.\n"
 					+ "Any questions or bugs found should "
@@ -3018,7 +3018,7 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 				{
 				    //szurl ="ftp://ftp.geneontology.org/go/gene-associations/"+szfile;
 				    //changed in 1.3.6 to access http site instead of ftp
-				    szurl ="http://www.geneontology.org/gene-associations/"+szfile;
+				    szurl = "http://current.geneontology.org/annotations/"+szfile;//"http://www.geneontology.org/gene-associations/"+szfile;
 				}
 
 			} else if (ntype == XREF) {
@@ -3040,7 +3040,7 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 				}
 				szurl += szfile;
 			} else if (ntype == OBO) {
-				szurl = "http://www.geneontology.org/ontology/gene_ontology.obo";
+			    szurl = "http://purl.obolibrary.org/obo/go/go-basic.obo";//"http://www.geneontology.org/ontology/gene_ontology.obo";
 			} else { // ntype is a MIRNAEXP file type
 				szurl = "MIRNA DATA WEBSITE" + szfile;
 			}//TODO: replace with hosting website
@@ -3243,10 +3243,10 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 			szMessage = "This field takes a list of unacceptable evidence codes for "
 					+ "gene annotations delimited by either a comma (','), semicolon (';'), "
 					+ "or pipe ('|').  If this field is left empty, then "
-					+ "all evidence codes are assumed to be acceptable.  Evidence code symbols are "
+					+ "all evidence codes are assumed to be acceptable.  Evidence code symbols include "
 					+ "IEA, IC, IDA, IEP, IGI, IMP, IPI, ISS, RCA, NAS, ND, TAS, and NR.  "
 					+ "Information about GO evidence codes can be found at "
-					+ "http://www.geneontology.org/GO.evidence.codes.shtml.  Note that this field only applies "
+					+ "http://geneontology.org/docs/guide-go-evidence-codes/.  Note that this field only applies "
 					+ "if the gene annotations are in the official 15 column GO annotation format.  "
 					+ "The evidence code is the entry in column 7.  "
 					+ "For example to exclude the annotations that were inferred from electronic annotation "
@@ -3386,7 +3386,7 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 			szMessage = "This file, which is optional, specifies a mapping between category IDs and names.  "
 					+ "The first column contains category IDs while the second column contains category names "
 					+ "corresponding to the category ID in the first column.  Note that the category names for "
-					+ "official Gene Ontology (GO) categories are included in the 'gene_ontology.obo' file "
+					+ "official Gene Ontology (GO) categories are included in the 'go-basic.obo' file "
 					+ "and thus do not need to be included here. "
 					+ "This file is rather intended to define names of additional gene sets "
 					+ "that are not part of GO, but will be included in a GO analysis.  "
@@ -3547,7 +3547,7 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 			szMessage = "This file contains the Gene Ontology (GO) annotations of genes.  "
 					+ "The file can be in one of two formats:\n\n"
 					+ "1.  The file can be in the official 15 column GO Annotation format "
-					+ "described at http://www.geneontology.org/GO.annotation.shtml#file.  In this case any entry in the "
+					+ "described at http://geneontology.org/docs/go-annotation-file-gaf-format-2.0/.  In this case any entry in the "
 					+ "DB_Object_ID (Column 2), DB_Object_Symbol (Column 3), DB_Object_Name (Column 10), or "
 					+ "DB_Object_Synonym (Column 11) fields matching a spot ID or gene symbol in the data set "
 					+ "will be annotated as belonging to GO ID (Column 5).  "
@@ -3562,7 +3562,7 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 					+ "annotated as belonging to the GO category in Column 5.  "
 					+ "Note that the exact content of the 'DB_Object_ID', 'DB_Object_Symbol', "
 					+ "'DB_Object_Name', and 'DB_Object_Synonym' varies between annotation source, "
-					+ "consult the README files available at http://www.geneontology.org/GO.current.annotations.shtml "
+					+ "consult the README files available at http://current.geneontology.org/products/pages/downloads.html "
 					+ "to find out more information about the content of these fields for a specific annotation source.\n\n"
 					+ "2.  Alternatively the file can have two columns where the first column contains gene symbols "
 					+ "or spot IDs and the second column contains annotations of the genes in the first column. "
@@ -3662,7 +3662,7 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 					+ "the file cannot be downloaded automatically.  If the annotation file is not present locally it "
 					+ "must be downloaded and thus the 'Annotation' check box will automatically be marked.  "
 					+ "Gene annotation files are downloaded from "
-					+ "ftp://ftp.geneontology.org/go/gene-associations/ unless it is "
+					+ "http://current.geneontology.org/annotations/ unless it is "
 					+ "an EBI data source in which case it will be downloaded from "
 					+ "ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/.\n\n"
 					+ "*The 'Cross References' file corresponds to the file under the 'Cross References File' text "
@@ -3671,9 +3671,9 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 					+ "on the computer it must be downloaded. Cross reference files are downloaded from "
 					+ "ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/.\n\n"
 					+ "*The 'Ontology' checkbox corresponds to the gene "
-					+ "ontology specified in the gene_ontology.obo file.  It must be present if a non-user provided "
+					+ "ontology specified in the go-basic.obo file.  It must be present if a non-user provided "
 					+ "annotation source is selected, otherwise an attempt to download the file from "
-					+ "http://www.geneontology.org/ontology/ will be made. \n\nCurrently:\n";
+					+ "http://purl.obolibrary.org/obo/go/go-basic.obo will be made. \n\nCurrently:\n";
 			szxrefval = xrefField.getText();
 			szgoval = goField.getText();
 			String szontologydate = "";
@@ -3725,9 +3725,9 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 			Util.renderDialog(this, szMessage, 50, 100);
 		} else if (esource == presetsHButton) {
 			szMessage = "The user can either select to provide their own gene annotation file ('User provided'), "
-					+ "'No annotations', or use one of 35 gene annotation files available from the Gene Ontology "
-					+ "Consortium.  More information about these 35 annotation files can be found here "
-					+ "http://www.geneontology.org/GO.current.annotations.shtml and in the case of "
+					+ "'No annotations', or use one of 37 gene annotation files available from the Gene Ontology "
+					+ "Consortium.  More information about these 37 annotation files can be found here "
+					+ "http://current.geneontology.org/products/pages/downloads.html and in the case of "
 					+ "annotations from the European Bioinformatics Institue (EBI) also here http://www.ebi.ac.uk/GOA/.  "
 					+ "If one of the predefined annotation files "
 					+ "is selected then the annotation field will automatically be filled in and the option will be "
