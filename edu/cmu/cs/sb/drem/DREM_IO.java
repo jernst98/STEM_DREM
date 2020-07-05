@@ -2811,7 +2811,7 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 			};
 			(new Thread(clusterrun)).start();
 		} else if (esource == infoButton) {
-			String szMessage = "This is version 2.0.4 of the Dynamic Regulatory Events Miner (DREM).\n\n"
+			String szMessage = "This is version 2.0.5 of the Dynamic Regulatory Events Miner (DREM).\n\n"
 					+ "The Dynamic Regulatory Events Miner (DREM) was developed by Jason Ernst "
 					+ "in collaboration with Ziv Bar-Joseph and extended by William E. Devanny, Anthony Gitter and Marcel H. Schulz.\n"
 					+ "Any questions or bugs found should "

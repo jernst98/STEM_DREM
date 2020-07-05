@@ -320,7 +320,7 @@ public class DataSetCore {
 
 		// checks if every col ends with a tab then we assume we have one less
 		// column
-		boolean balltabend = true;
+		//boolean balltabend = true;
 
 		// stores the expression data into alInputFile
 		ArrayList<String> alInputFile = new ArrayList<String>();
@@ -329,9 +329,10 @@ public class DataSetCore {
 
 			if ((szblank.countTokens() >= 1) || (!bspotincluded)) {
 				alInputFile.add(szLine);
-				if (balltabend) {
-					balltabend = (szLine.endsWith("\t"));
-				}
+				//removed in stem 1.3.13
+				//if (balltabend) {
+				//	balltabend = (szLine.endsWith("\t"));
+				//}
 			}
 		}
 		brInputFile.close();
@@ -339,7 +340,8 @@ public class DataSetCore {
 		st2 = new StringTokenizer(szHeaderLine, "\t", true);
 
 		numcols = st2.countTokens() - st.countTokens();
-		if (balltabend) {
+		//if (balltabend) {
+		if (szHeaderLine.endsWith("\t")) {
 			numcols--;
 		}
 

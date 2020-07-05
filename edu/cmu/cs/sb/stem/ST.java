@@ -2497,6 +2497,15 @@ public class ST extends JFrame implements ActionListener
 
 	      if (theDataSet1.numcols <=1)
 	      {
+		  if (theDataSet1.numcols==0)
+		  {
+		      System.out.println("Running Gene Ontology enrichment - only one tab delimited column found");
+		  }
+		  else if (theDataSet1.numcols==1)
+		  {
+		      System.out.println("Running Gene Ontology enrichment - only two tab delimited columns found");
+		  }
+
 	         //throw error if no prefiltered gene file
 		  theDataSet1 = new STEM_DataSet(theDataSet1.filterDuplicates(),theDataSet1);
                   theDataSet1.tga = new STEM_GoAnnotations(szorganismsourceval,szxrefsourceval,szxrefval,szgoval,
@@ -2594,7 +2603,14 @@ public class ST extends JFrame implements ActionListener
 
 	      if (theDataSet1.numcols <=1)
 	      {
-
+		  if (theDataSet1.numcols==0)
+		  {
+		      System.out.println("Running Gene Ontology enrichment - only one tab delimited column found");
+		  }
+		  else if (theDataSet1.numcols==1)
+		  {
+		      System.out.println("Running Gene Ontology enrichment - only two tab delimited columns found");
+		  }
 		  theDataSet1 = new STEM_DataSet(theDataSet1.filterDuplicates(), theDataSet1);
 		  theDataSet1.tga = new  STEM_GoAnnotations(szorganismsourceval,szxrefsourceval,
                                               szxrefval,szgoval,szgocategoryval,
@@ -2689,6 +2705,15 @@ public class ST extends JFrame implements ActionListener
 	      //System.out.println(theDataSet1.numcols);
 	      if (theDataSet1.numcols <=1)
 	      {
+
+		  if (theDataSet1.numcols==0)
+		  {
+		      System.out.println("Running Gene Ontology enrichment - only one tab delimited column found");
+		  }
+		  else if (theDataSet1.numcols==1)
+		  {
+		      System.out.println("Running Gene Ontology enrichment - only two tab delimited columns found");
+		  }
 	         //throw error if no prefiltered gene file
 		  theDataSet1 = new STEM_DataSet(theDataSet1.filterDuplicates(),theDataSet1);
 		  theDataSet1.tga =  new  STEM_GoAnnotations(szorganismsourceval,szxrefsourceval,
@@ -2795,6 +2820,15 @@ public class ST extends JFrame implements ActionListener
 					      bmaxminval, ballpermuteval,balltime);
 	     if (theDataSet1.numcols <=1)
 	     {
+
+		  if (theDataSet1.numcols==0)
+		  {
+		      System.out.println("Running Gene Ontology enrichment - only one tab delimited column found");
+		  }
+		  else if (theDataSet1.numcols==1)
+		  {
+		      System.out.println("Running Gene Ontology enrichment - only two tab delimited columns found");
+		  }
 
 		 theDataSet1 = new STEM_DataSet(theDataSet1.filterDuplicates(),theDataSet1);
 		 theDataSet1.tga = new STEM_GoAnnotations(szorganismsourceval,szxrefsourceval,
@@ -4098,7 +4132,7 @@ public class ST extends JFrame implements ActionListener
        }
        else if (esource == infoButton)
        {
-           String szMessage = "This is version 1.3.12 of the Short Time-series Expression Miner (STEM).\n\n"+
+           String szMessage = "This is version 1.3.13 of the Short Time-series Expression Miner (STEM).\n\n"+
                        "The Short Time-series Expression Miner (STEM) was developed by Jason Ernst, "+
                        "Dima Patek, and Ziv Bar-Joseph. " +
                        "Any questions or bugs found should "+
@@ -5825,7 +5859,7 @@ public class ST extends JFrame implements ActionListener
 	}
 	if (bshowusage)
 	{
-	    System.out.println("USAGE: java ST [[-d defaultfilename.txt][-o GOoutfile.txt]|-b batchInput batchOutputDir]");
+	    System.out.println("USAGE: java -jar stem.jar [[-d defaultfilename.txt][-o GOoutfile.txt]|-b batchInput batchOutputDir]");
             return;
 	}
         
