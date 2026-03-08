@@ -2811,11 +2811,11 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 			};
 			(new Thread(clusterrun)).start();
 		} else if (esource == infoButton) {
-			String szMessage = "This is version 2.0.5 of the Dynamic Regulatory Events Miner (DREM).\n\n"
+			String szMessage = "This is Version 2.0.6 of the Dynamic Regulatory Events Miner (DREM).\n\n"
 					+ "The Dynamic Regulatory Events Miner (DREM) was developed by Jason Ernst "
 					+ "in collaboration with Ziv Bar-Joseph and extended by William E. Devanny, Anthony Gitter and Marcel H. Schulz.\n"
 					+ "Any questions or bugs found should "
-					+ "be emailed to {jernst/agitter/maschulz}@cs.cmu.edu.";
+					+ "be emailed to jason.ernst@ucla.edu or {agitter/maschulz}@cs.cmu.edu.";
 
 			Util.renderDialog(this, szMessage, 50, 100, "Information");
 		} else if ((numchildHButton == esource)
@@ -3018,7 +3018,7 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 				{
 				    //szurl ="ftp://ftp.geneontology.org/go/gene-associations/"+szfile;
 				    //changed in 1.3.6 to access http site instead of ftp
-				    szurl = "http://current.geneontology.org/annotations/"+szfile;//"http://www.geneontology.org/gene-associations/"+szfile;
+				    szurl = "https://current.geneontology.org/annotations/"+szfile;//"http://www.geneontology.org/gene-associations/"+szfile;
 				}
 
 			} else if (ntype == XREF) {
@@ -3040,7 +3040,8 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 				}
 				szurl += szfile;
 			} else if (ntype == OBO) {
-			    szurl = "http://purl.obolibrary.org/obo/go/go-basic.obo";//"http://www.geneontology.org/ontology/gene_ontology.obo";
+			    szurl = "https://current.geneontology.org/ontology/go-basic.obo"; 
+				//"http://purl.obolibrary.org/obo/go/go-basic.obo";//"http://www.geneontology.org/ontology/gene_ontology.obo";
 			} else { // ntype is a MIRNAEXP file type
 				szurl = "MIRNA DATA WEBSITE" + szfile;
 			}//TODO: replace with hosting website
@@ -3246,7 +3247,7 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 					+ "all evidence codes are assumed to be acceptable.  Evidence code symbols include "
 					+ "IEA, IC, IDA, IEP, IGI, IMP, IPI, ISS, RCA, NAS, ND, TAS, and NR.  "
 					+ "Information about GO evidence codes can be found at "
-					+ "http://geneontology.org/docs/guide-go-evidence-codes/.  Note that this field only applies "
+					+ "https://geneontology.org/docs/guide-go-evidence-codes/.  Note that this field only applies "
 					+ "if the gene annotations are in the official 15 column GO annotation format.  "
 					+ "The evidence code is the entry in column 7.  "
 					+ "For example to exclude the annotations that were inferred from electronic annotation "
@@ -3547,7 +3548,7 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 			szMessage = "This file contains the Gene Ontology (GO) annotations of genes.  "
 					+ "The file can be in one of two formats:\n\n"
 					+ "1.  The file can be in the official 15 column GO Annotation format "
-					+ "described at http://geneontology.org/docs/go-annotation-file-gaf-format-2.0/.  In this case any entry in the "
+					+ "described at https://geneontology.org/docs/go-annotation-file-gaf-format-2.0/.  In this case any entry in the "
 					+ "DB_Object_ID (Column 2), DB_Object_Symbol (Column 3), DB_Object_Name (Column 10), or "
 					+ "DB_Object_Synonym (Column 11) fields matching a spot ID or gene symbol in the data set "
 					+ "will be annotated as belonging to GO ID (Column 5).  "
@@ -3562,7 +3563,7 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 					+ "annotated as belonging to the GO category in Column 5.  "
 					+ "Note that the exact content of the 'DB_Object_ID', 'DB_Object_Symbol', "
 					+ "'DB_Object_Name', and 'DB_Object_Synonym' varies between annotation source, "
-					+ "consult the README files available at http://current.geneontology.org/products/pages/downloads.html "
+					+ "consult the README files available at https://current.geneontology.org/products/pages/downloads.html "
 					+ "to find out more information about the content of these fields for a specific annotation source.\n\n"
 					+ "2.  Alternatively the file can have two columns where the first column contains gene symbols "
 					+ "or spot IDs and the second column contains annotations of the genes in the first column. "
@@ -3662,7 +3663,7 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 					+ "the file cannot be downloaded automatically.  If the annotation file is not present locally it "
 					+ "must be downloaded and thus the 'Annotation' check box will automatically be marked.  "
 					+ "Gene annotation files are downloaded from "
-					+ "http://current.geneontology.org/annotations/ unless it is "
+					+ "https://current.geneontology.org/annotations/ unless it is "
 					+ "an EBI data source in which case it will be downloaded from "
 					+ "ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/.\n\n"
 					+ "*The 'Cross References' file corresponds to the file under the 'Cross References File' text "
@@ -3673,7 +3674,8 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 					+ "*The 'Ontology' checkbox corresponds to the gene "
 					+ "ontology specified in the go-basic.obo file.  It must be present if a non-user provided "
 					+ "annotation source is selected, otherwise an attempt to download the file from "
-					+ "http://purl.obolibrary.org/obo/go/go-basic.obo will be made. \n\nCurrently:\n";
+					+ "https://current.geneontology.org/ontology/go-basic.obo will be made. \n\nCurrently:\n";
+			//+ "http://purl.obolibrary.org/obo/go/go-basic.obo will be made. \n\nCurrently:\n";
 			szxrefval = xrefField.getText();
 			szgoval = goField.getText();
 			String szontologydate = "";
@@ -3727,7 +3729,7 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 			szMessage = "The user can either select to provide their own gene annotation file ('User provided'), "
 					+ "'No annotations', or use one of 37 gene annotation files available from the Gene Ontology "
 					+ "Consortium.  More information about these 37 annotation files can be found here "
-					+ "http://current.geneontology.org/products/pages/downloads.html and in the case of "
+					+ "https://current.geneontology.org/products/pages/downloads.html and in the case of "
 					+ "annotations from the European Bioinformatics Institue (EBI) also here http://www.ebi.ac.uk/GOA/.  "
 					+ "If one of the predefined annotation files "
 					+ "is selected then the annotation field will automatically be filled in and the option will be "
@@ -4932,6 +4934,8 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 		boolean bshowusage = true;
 		boolean bbatchmode = false;
 		String szoutmodelfile = "";
+		String szgeneassignfile = "";
+		String szTFDIR = "";
 
 		if (args.length == 0) {
 			bshowusage = false;
@@ -4948,17 +4952,49 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 				bbatchmode = true;
 			}
 		}
+		else if (args.length == 4) {
+
+		    if (args[0].equals("-b")) {
+			szDefaultFile = args[1];
+			szoutmodelfile = args[2];
+			szgeneassignfile = args[3];
+			bshowusage = false;
+			bbatchmode = true;
+		    }
+
+		}
+		else if (args.length == 5) {
+
+		    if (args[0].equals("-b")) {
+			szDefaultFile = args[1];
+			szoutmodelfile = args[2];
+			szgeneassignfile = args[3];
+			szTFDIR = args[4];
+			File f = new File(szTFDIR);
+			if (!f.exists())
+			{
+			    if (!f.mkdirs())
+			    {
+			       throw new IllegalArgumentException(szTFDIR+" does not exist and could not be created!");
+			    }
+			}
+			bshowusage = false;
+			bbatchmode = true;
+		    }
+
+		}
+
 
 		if (bshowusage) {
 			System.out
-					.println("USAGE: java -jar drem.jar [-d defaultfilename.txt|-b settingsfile.txt outmodelfile.txt]");
+					.println("USAGE: java -jar drem.jar [-d defaultfilename.txt|-b settingsfile.txt outmodelfile.txt [geneassignfile.txt [TFSCOREDIR]]]");
 			return;
 		}
 
 		// Schedule a job for the event-dispatching thread:
 		// creating and showing this application's GUI.
 		if (bbatchmode) {
-			new DREM_IO_Batch(szDefaultFile, szoutmodelfile);// szBatchInputDir,szBatchOutputDir);
+		    new DREM_IO_Batch(szDefaultFile, null, szoutmodelfile,szgeneassignfile,szTFDIR);// szBatchInputDir,szBatchOutputDir);
 		} else {
 			javax.swing.SwingUtilities.invokeLater(new Runnable() {
 				public void run() {

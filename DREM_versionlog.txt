@@ -1,0 +1,103 @@
+3/8/2026 Version 2.0.6 Released
+* Updated the set of integrated GO annotations available in DREM
+* Fixed broken download links associated with some GO annotations and the Gene Ontology file
+* Added the ability to output in batch mode gene assignments and TF split and path tables
+* Set main interface individual TF labels are not movable on the interface, but the entire block remains movable
+* In certain cases of numerical instability set it so DREM outputs debug information to the console instead of throwing an index out of bounds exception
+
+7/5/2020 Version 2.0.5 GitHub Only Release
+* Updates in shared source code with STEM, but did not change DREM functionality
+
+6/24/2019 Version 2.0.4 Released
+-Updated STEM to handle changes to the GO which had caused some download
+links to be broken
+-Slight adjustments to GUI to remove some parts being cutoff in recent Java versions
+
+9/10/2016 Version 2.0.3 Released
+- changed license on DREM so it is now GPL v3.0
+- updated/added/removed entries and filenames in the GO list to be current 
+- Fixed an issue of buttons on the bottom of the main DREM output
+being cutoff from display with newer versions of Java on some systems
+
+6/18/2012 Version 2.0.2 Released
+-In order to support Ensembl Gene Ids for human and mouse analyses, the files human_encode.txt, human_predicted_100.txt, human_predicted_1000.txt and mouse_predicted.txt have alternative Ensembl Gene Ids in the 2nd column from this version on. This means that Expression data sets can use Ensembl Gene Ids as they are commonly used for RNA-Seq based expression studies.
+
+3/2/2012 Version 2.0.1 Released
+- Fixed a bug in settings file saving/loading
+- Fixed a bug that could cause IO problems when saving a DREM model
+- Fixed a bug in selecting genes to display based on TF binding
+
+12/8/2011 Version 2.0 Released
+- since Version 2.0 Java 1.5 or higher is required.
+- New static binding data for mouse, human, D. melanogaster, A. thaliana 
+- A new and more flexible implementation of the IOHMM supports dynamic binding data for each time point or as a mix of static/dynamic TF input. For that a new input format, the 4-col format, is now supported by DREM. It shares the first 3 columns with the 3-col format. In the new 4th column the time point for which the TF-DNA data should be used when learning the model can be set. 
+- Expression levels of TFs can be used to improve the models learned by DREM. The new tab 'Expression Scaling Options' in the Options window the parameters for using the TF expression level can be set.
+- Differentially expressed TFs are now highlighted in the DREM model view, the view can be toggled to turn highlighting on or not.
+- Continous binding values can be fed to DREM, for example converted from binding p-values. For that reading 3-col or 4-col format was adopted to real numbers.
+- The motif finder DECOD can be used in conjuction with DREM and help find DNA motifs for unannotated splits. To support that, DREM has an additional 'DECOD Options' tab in the Options box, where the user has to point to the DECOD jar-file and give a set of sequences associated with the genes. User can pick any DNA sequence of interest, promoters, introns, UTRs... 
+- TF enrichment boxes for splits or paths can be dragged to another spot on the model view. This fixes a problem with overlapping boxes or boxes close to paths in the model and their associated TFs.
+- All significant regulators with the currently selected enrichment threshold in the model can be saved now with a new button in the interface.
+- Updated list of GO annotations for download.
+
+1/1/2011 Version 1.0.9b Released
+*Added a minimum standard deviation parameter to the input interface - useful when modeling RNA-seq due to 
+genes having low discrete counts
+*Added ability to learn a DREM model without going through the interface with the flag
+"-b settingsfile.txt outmodelfile.txt" from the command line where the settings file has the same format as the defaults file
+*Added ability to save DREM models into SVG format using batik software
+*Added ability to save parameters used to generate model with disk icon on the DREM gui
+*Added fold enrichments to GO tables. This is the observed divided by the expected enrichments.
+*Updated list of GO annotations available for download
+*Now filtering NOT modified annotations in annotation files (effects a very small percentage of annotations)
+*Behind the scenes reorganization of code
+*Fixed a bug introduced in a previous version preventing using DREM when choosing to filter genes without binding data
+*Fixed a bug preventing DREM from working with very long time or highly branching time courses causing integer overflows on the 
+internal path representation
+
+3/14/2010 Version 1.0.8b Released
+Changed annotation downloads from the geneontology from being ftp based
+to being http to fix connection problems.
+
+7/11/2009 Version 1.0.7b Released
+Updated GO references in DREM_IO.java
+Fixed bug that made possible an array out of index exception 
+certain rare cases in drem\DREM_NaiveBayes.java
+
+1/15/2009 Version 1.0.6b Released
+Source code released. Behind the scenes reorganization of the code.
+
+3/31/2008 Version 1.0.5b Released
+Updated gene ontology parsing algorithm so it could handle the new 
+regulates relationship. Fixed bug in selecting no annotations.
+
+3/7/2008 Version 1.0.4.b Released
+*Now included support for E. coli in the TF-gene interaction files
+*Removed the "-ms512M" option to start STEM from the cmd files
+*Corrected the DREM documentation on the filtering "Minimum Correlation 
+between Repeats" parameter, in the case of three or more repeats the 
+criteria is based on the pairwise mean, not the median
+
+10/12/2007 Version 1.0.3b Released
+*Bug fixed with three column format when all interactions for the same TF was not consecutive
+
+7/16/2007 Version 1.0.2b Released
+*Added a three col format for TF-gene interactions, good for sparse input
+*Added a new model selection framework which directly penalizes the number 
+of states in the model
+*Added a convergence parameter that was previously only internal to the 
+code to the interface
+
+4/26/2007 Version 1.0.1b Released
+*Added compatibility with Java 1.4 and 1.5
+*When saving temporary models that
+appear after pressing "Display Current Model" the
+displayed model is saved, previously because of a bug the
+current model in the search would be saved
+*Minor bug fixes when building a model without TF-gene
+input, or when building with such input and allowing three 
+or more paths out of splits
+*Added a readme.txt file to the download
+
+1/16/2007 Version 1.0.0b Released
+
+

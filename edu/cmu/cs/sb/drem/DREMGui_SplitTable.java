@@ -48,6 +48,347 @@ public class DREMGui_SplitTable extends JPanel implements ActionListener {
 	boolean regPriorsPresent;
 	boolean miRNAScorePresent;
 
+
+
+        /**
+	 * Returns the column headers for a 2-way split table.
+	 * This has been made static to accomodate batch mode, but in future GUI might want to call this.
+	 */
+        public static String[] splitTableColumnNames2WAY(DREM_Timeiohmm theTimeiohmm,DREM_Timeiohmm.Treenode ptr)
+        {
+	    boolean miRNAScorePresent = theTimeiohmm.scaleMIRNAExp && theTimeiohmm.miRNADataSet != null;
+	    boolean regPriorsPresent = theTimeiohmm.bindingData.regPriors != null;
+	    int nsize = theTimeiohmm.bindingData.signedBindingValuesUnsorted.size();
+		
+	    String[] columnNames = new String[6 + 2 * nsize + (miRNAScorePresent ? 2 : 0) +
+		                         (regPriorsPresent? 2 : 0)];
+
+	    columnNames[0] = "TF";
+	    columnNames[1] = "Coeff";
+
+	    for (int nel = 0; nel < nsize; nel++) {
+			columnNames[2 + nel] = "Low "
+					+ theTimeiohmm.bindingData.signedBindingValuesSorted[nel];
+			columnNames[2 + nsize + nel] = "High "
+					+ theTimeiohmm.bindingData.signedBindingValuesSorted[nel];
+	    }
+
+	    int scoreIndex = columnNames.length - 1;
+	    int diffIndex = columnNames.length - 2;
+	    int avgHighIndex = columnNames.length - 3;
+	    int avgLowIndex = columnNames.length - 4;
+		
+	    int maxPriorIndex = columnNames.length - 8 + (miRNAScorePresent ? 0 : 2);
+	    int priorIndex = columnNames.length - 7 + (miRNAScorePresent ? 0 : 2);
+	    int actScoreIndex = columnNames.length - 6;
+	    int actIndex = columnNames.length - 5;
+		
+	    if(miRNAScorePresent)
+	    {
+		columnNames[actScoreIndex] = "Act. Score";
+		columnNames[actIndex] = "Activity";
+	    }
+	    if(regPriorsPresent)
+	    {
+		columnNames[priorIndex] = "Act. Prior";
+		columnNames[maxPriorIndex] = "Max Act. Prior";
+	    }
+	    columnNames[avgLowIndex] = "Avg. Low";
+	    columnNames[avgHighIndex] = "Avg. High";
+	    columnNames[diffIndex] = "Diff";
+	    columnNames[scoreIndex] = "Score";
+
+	    return columnNames;
+	}
+
+
+        /**
+	 * Returns column headers for a 3 or more way split table.
+	 * This has been made static to accomodate batch mode, but in future GUI might want to call this.
+	 */
+        public static String[] splitTableColumnNamesGreater2WAY(DREM_Timeiohmm theTimeiohmm,DREM_Timeiohmm.Treenode ptr, int ntable)
+        {
+
+	    boolean miRNAScorePresent = theTimeiohmm.scaleMIRNAExp && theTimeiohmm.miRNADataSet != null;
+	    boolean regPriorsPresent = theTimeiohmm.bindingData.regPriors != null;
+	    int nsize = theTimeiohmm.bindingData.signedBindingValuesUnsorted.size();
+		
+	    String[] columnNames = new String[6 + 2 * nsize + (miRNAScorePresent ? 2 : 0)
+		                         + (regPriorsPresent ? 2 : 0)];
+
+	    columnNames[0] = "TF";
+	    columnNames[1] = "Coeff";
+
+	    String szLabel;
+	    if (ptr.numchildren == 3) {
+			if (ntable == 0) {
+				szLabel = "Low ";
+			} else if (ntable == 1) {
+				szLabel = "Mid ";
+			} else // (ntable == 2)
+			{
+				szLabel = "High ";
+			}
+	    } else {
+			szLabel = "This ";
+	    }
+
+	    for (int nel = 0; nel < nsize; nel++) {
+			columnNames[2 + nel] = szLabel
+					+ theTimeiohmm.bindingData.signedBindingValuesSorted[nel];
+			columnNames[2 + nsize + nel] = "Other "
+					+ theTimeiohmm.bindingData.signedBindingValuesSorted[nel];
+	    }
+
+	    int scoreIndex = columnNames.length - 1;
+	    int diffIndex = columnNames.length - 2;
+	    int avgOtherIndex = columnNames.length - 3;
+	    int avgLabelIndex = columnNames.length - 4;
+		
+	    int maxPriorIndex = columnNames.length - 8 + (miRNAScorePresent ? 0 : 2);
+	    int priorIndex = columnNames.length - 7 + (miRNAScorePresent ? 0 : 2);
+	    int actScoreIndex = columnNames.length - 6;
+	    int actIndex = columnNames.length - 5;
+		
+	    if(miRNAScorePresent)
+	    {
+		columnNames[actScoreIndex] = "Act. Score";
+		columnNames[actIndex] = "Activity";
+	    }
+	    if(regPriorsPresent)
+	    {
+		columnNames[priorIndex] = "Act. Prior";
+		columnNames[maxPriorIndex] = "Max Act. Prior";
+	    }
+	    columnNames[avgLabelIndex] = "Avg. " + szLabel.trim();
+	    columnNames[avgOtherIndex] = "Avg. Other";
+	    columnNames[diffIndex] = "Diff";
+	    columnNames[scoreIndex] = "Score";
+
+	    return columnNames;
+	}
+
+
+        /**
+	 * Returns data table for a 2-way split table.
+	 * This has been made static to accomodate batch mode, but in future GUI might want to call this.
+	 */
+        public static String[][] splitTableTableData2WAY(DREM_Timeiohmm theTimeiohmm,DREM_Timeiohmm.Treenode ptr, String[] columnNames)
+        {
+
+	   boolean miRNAScorePresent = theTimeiohmm.scaleMIRNAExp && theTimeiohmm.miRNADataSet != null;
+	   boolean regPriorsPresent = theTimeiohmm.bindingData.regPriors != null;
+	   int nsize = theTimeiohmm.bindingData.signedBindingValuesUnsorted.size();
+	   int numrows = theTimeiohmm.bindingData.regNames.length;
+	   String[][] tabledata = new String[numrows][columnNames.length];
+	   double[] params = null;
+
+	   int scoreIndex = columnNames.length - 1;
+	   int diffIndex = columnNames.length - 2;
+	   int avgHighIndex = columnNames.length - 3;
+	   int avgLowIndex = columnNames.length - 4;
+		
+	   int maxPriorIndex = columnNames.length - 8 + (miRNAScorePresent ? 0 : 2);
+	   int priorIndex = columnNames.length - 7 + (miRNAScorePresent ? 0 : 2);
+	   int actScoreIndex = columnNames.length - 6;
+	   int actIndex = columnNames.length - 5;
+
+
+
+	   if (!theTimeiohmm.BREGDREM) {
+	       	params = ptr.tranC.dcoeff;
+	   }
+
+	   NumberFormat nf = NumberFormat.getInstance(Locale.ENGLISH);
+	   nf.setMinimumFractionDigits(3);
+	   nf.setMaximumFractionDigits(3);
+		
+	   for (int nrow = 0; nrow < tabledata.length; nrow++) {
+	       tabledata[nrow][0] = theTimeiohmm.bindingData.regNames[nrow];
+	       tabledata[nrow][scoreIndex] = doubleToSz(ptr.dpvals[nrow][0]);
+
+	       if(miRNAScorePresent)
+	       {
+		   Integer dataSetIndex = theTimeiohmm.reg2DataSetIndex.get(theTimeiohmm.bindingData.regNames[nrow].toUpperCase());
+		   // if doesnt exists use only the bindingvalue as if it were a TF
+		   if (dataSetIndex != null) {
+		       int type = theTimeiohmm.bindingData.regTypes[nrow];
+		       double expression = 0;
+		       switch (type)
+		       {
+		           case RegulatorBindingData.MIRNA:
+			       expression = theTimeiohmm.miRNADataSet.data[dataSetIndex][ptr.ndepth + 1];
+						//expression = theTimeiohmm.bindingData.reg2GeneBinding[time][numRegulator][geneIndex];
+			       break;
+			   case RegulatorBindingData.TF :
+			       expression = theTimeiohmm.theDataSet.data[dataSetIndex][ptr.ndepth];
+			       break;
+		       }
+		       tabledata[nrow][actIndex] = String
+					.valueOf(expression);
+		    } else {
+		       tabledata[nrow][actIndex] = "N/A";
+		 }
+		     tabledata[nrow][actScoreIndex] = String
+					.valueOf(ptr.tranC.traindataTF[nrow][0]);
+	       }
+	       if (ptr.nextptr[0].dmean < ptr.nextptr[1].dmean) {
+	          tabledata[nrow][diffIndex] = nf
+						.format(ptr.ddiff[nrow][0]);
+
+		  if (params != null) {
+		      tabledata[nrow][1] = nf.format(-params[nrow + 1]);
+		  } else {
+					tabledata[nrow][1] = "0";
+		  }
+
+		  tabledata[nrow][avgHighIndex] = nf
+						.format(ptr.dscore[nrow][1]);
+		  tabledata[nrow][avgLowIndex] = nf
+						.format(ptr.dscore[nrow][0]);
+
+		  for (int nel = 0; nel < nsize; nel++) {
+					tabledata[nrow][2 + nel] = ""
+							+ (int) ptr.ncountvals[nrow][0][nel];
+					tabledata[nrow][2 + nsize + nel] = ""
+							+ (int) ptr.ncountvals[nrow][1][nel];
+		  }
+	       } else {
+	          tabledata[nrow][diffIndex] = nf
+						.format(-ptr.ddiff[nrow][0]);
+				// reverse if not swap because of paramz. of logit
+
+		  if (params != null) {
+		      tabledata[nrow][1] = nf.format(params[nrow + 1]);
+		  } else {
+		      tabledata[nrow][1] = "0";
+		  }
+
+		  tabledata[nrow][avgHighIndex] = nf
+						.format(ptr.dscore[nrow][0]);
+		  tabledata[nrow][avgLowIndex] = nf
+						.format(ptr.dscore[nrow][1]);
+
+		  for (int nel = 0; nel < nsize; nel++) {
+		       	tabledata[nrow][2 + nel] = ""
+							+ (int) ptr.ncountvals[nrow][1][nel];
+			tabledata[nrow][2 + nsize + nel] = ""
+							+ (int) ptr.ncountvals[nrow][0][nel];
+		  }
+	       }
+			
+               if(regPriorsPresent)
+	       {
+	          tabledata[nrow][priorIndex] = DREMGui_SplitTable.staticlrgNumFt(
+						ptr.dTFActivityScore[nrow], nf);
+		  tabledata[nrow][maxPriorIndex] = DREMGui_SplitTable.staticlrgNumFt(
+						theTimeiohmm.dMaxTFActivityScore[nrow], nf);
+	       }
+	   }
+
+	   return tabledata;
+	}
+
+
+        /**
+	 * Returns data table for a 3 or more way split table.
+	 * This has been made static to accomodate batch mode, but in future GUI might want to call this.
+	 */
+        public static String[][] splitTableTableDataGreater2WAY(DREM_Timeiohmm theTimeiohmm,DREM_Timeiohmm.Treenode ptr, int nchild, String[] columnNames)
+        {
+	   int numrows = theTimeiohmm.bindingData.regNames.length;
+	   int nsize = theTimeiohmm.bindingData.signedBindingValuesUnsorted.size();
+
+	   boolean miRNAScorePresent = theTimeiohmm.scaleMIRNAExp && theTimeiohmm.miRNADataSet != null;
+	   boolean regPriorsPresent = theTimeiohmm.bindingData.regPriors != null;
+
+	   int scoreIndex = columnNames.length - 1;
+	   int diffIndex = columnNames.length - 2;
+	   int avgOtherIndex = columnNames.length - 3;
+	   int avgLabelIndex = columnNames.length - 4;
+		
+	   int maxPriorIndex = columnNames.length - 8 + (miRNAScorePresent ? 0 : 2);
+	   int priorIndex = columnNames.length - 7 + (miRNAScorePresent ? 0 : 2);
+	   int actScoreIndex = columnNames.length - 6;
+	   int actIndex = columnNames.length - 5;
+
+	   String[][] tabledata = new String[numrows][columnNames.length];
+
+	   double[] params = null;
+
+	   if (!theTimeiohmm.BREGDREM) {
+	       	params = ptr.tranC.dcoeff;
+	   }
+
+	   NumberFormat nf = NumberFormat.getInstance(Locale.ENGLISH);
+	   nf.setMinimumFractionDigits(3);
+	   nf.setMaximumFractionDigits(3);
+
+	   for (int nrow = 0; nrow < tabledata.length; nrow++) {
+	       tabledata[nrow][0] = theTimeiohmm.bindingData.regNames[nrow];
+	       tabledata[nrow][diffIndex] = nf
+					.format(ptr.ddiff[nrow][nchild]);
+	       tabledata[nrow][scoreIndex] = doubleToSz(ptr.dpvals[nrow][nchild]);
+
+	       if(miRNAScorePresent)
+	       {
+		   Integer dataSetIndex = theTimeiohmm.reg2DataSetIndex.get(theTimeiohmm.bindingData.regNames[nrow].toUpperCase());
+		   // if doesnt exists use only the bindingvalue as if it were a TF
+		   if (dataSetIndex != null) {
+		       int type = theTimeiohmm.bindingData.regTypes[nrow];
+		       double expression = 0;
+		       switch (type)
+		       {
+		           case RegulatorBindingData.MIRNA:
+						expression = theTimeiohmm.miRNADataSet.data[dataSetIndex][ptr.ndepth + 1];
+						break;
+			   case RegulatorBindingData.TF :
+						expression = theTimeiohmm.theDataSet.data[dataSetIndex][ptr.ndepth];
+						break;
+		       }
+		       tabledata[nrow][actIndex] = String
+						.valueOf(expression);
+		   } else {
+		       tabledata[nrow][actIndex] = "N/A";
+		   }
+		      	tabledata[nrow][actScoreIndex] = String
+					.valueOf(ptr.tranC.traindataTF[nrow][0]);
+	       }
+			
+	       if ((nchild == ptr.numchildren - 1) || (params == null)) {
+		   tabledata[nrow][1] = "0";
+	       } else {
+				tabledata[nrow][1] = nf.format(params[(tabledata.length + 1)
+						* nchild + nrow + 1]);
+	       }
+
+	       tabledata[nrow][avgOtherIndex] = nf
+					.format(ptr.dscoreother[nrow][nchild]);
+	       tabledata[nrow][avgLabelIndex] = nf
+					.format(ptr.dscore[nrow][nchild]);
+
+	       for (int nel = 0; nel < nsize; nel++) {
+				tabledata[nrow][2 + nel] = ""
+						+ ptr.ncountvals[nrow][nchild][nel];
+				tabledata[nrow][2 + nsize + nel] = ""
+						+ ptr.nothersum[nrow][nchild][nel];
+	       }
+
+	       if(regPriorsPresent)
+	       {
+	           tabledata[nrow][priorIndex] = DREMGui_SplitTable.staticlrgNumFt(
+						ptr.dTFActivityScore[nrow], nf);
+	           tabledata[nrow][maxPriorIndex] = DREMGui_SplitTable.staticlrgNumFt(
+						theTimeiohmm.dMaxTFActivityScore[nrow], nf);
+	       }
+	   }
+
+	   return tabledata;
+
+       }
+
+
+
 	/**
 	 * Constructor for a table giving information on a split when there are two
 	 * paths out of the split
@@ -195,9 +536,9 @@ public class DREMGui_SplitTable extends JPanel implements ActionListener {
 			}
 			if(regPriorsPresent)
 			{
-				tabledata[nrow][priorIndex] = lrgNumFmt(
+				tabledata[nrow][priorIndex] = lrgNumFt(
 						ptr.dTFActivityScore[nrow], nf);
-				tabledata[nrow][maxPriorIndex] = lrgNumFmt(
+				tabledata[nrow][maxPriorIndex] = lrgNumFt(
 						theTimeiohmm.dMaxTFActivityScore[nrow], nf);
 			}
 		}
@@ -362,9 +703,9 @@ public class DREMGui_SplitTable extends JPanel implements ActionListener {
 			}
 			if(regPriorsPresent)
 			{
-				tabledata[nrow][priorIndex] = lrgNumFmt(
+				tabledata[nrow][priorIndex] = lrgNumFt(
 						ptr.dTFActivityScore[nrow], nf);
-				tabledata[nrow][maxPriorIndex] = lrgNumFmt(
+				tabledata[nrow][maxPriorIndex] = lrgNumFt(
 						theTimeiohmm.dMaxTFActivityScore[nrow], nf);
 			}
 		}
@@ -769,7 +1110,7 @@ public class DREMGui_SplitTable extends JPanel implements ActionListener {
 	 * @param nf
 	 * @return
 	 */
-	public String lrgNumFmt(double dNum, NumberFormat nf) {
+	public String lrgNumFt(double dNum, NumberFormat nf) {
 		// Format using doubleToSz for small numbers.
 		if (dNum < 1) {
 			return doubleToSz(dNum);
@@ -781,6 +1122,37 @@ public class DREMGui_SplitTable extends JPanel implements ActionListener {
 			if (df == null) {
 				df = new DecimalFormat("0.00E0");
 			}
+
+			// For consistency with the NumberFormat's handling of small numbers
+			return df.format(dNum).replace('E', 'e');
+		}
+	}
+
+
+
+	/**
+	 * Static versionb of lrgNumFt to accomodate batch mode, but in future may want GUI version to call this also
+	 * Formats a number for the table that may potentially have very large
+	 * values. If the number is less than 1 it is handled by doubleToSz. If it
+	 * is >= 1 and < 1000, format using the NumberFormat's format. Otherwise,
+	 * use scientific notation as specified by the global DecimalFormat.
+	 * 
+	 * @param dNum
+	 * @param nf
+	 * @return
+	 */
+	public static String staticlrgNumFt(double dNum, NumberFormat nf) {
+		// Format using doubleToSz for small numbers.
+		if (dNum < 1) {
+			return doubleToSz(dNum);
+		}
+		// Use the NumberFormat for numbers >= 1 and < 1000
+		else if (dNum < 1000) {
+			return nf.format(dNum);
+		} else {
+		    //if (df == null) {
+			DecimalFormat df = new DecimalFormat("0.00E0");
+			//}
 
 			// For consistency with the NumberFormat's handling of small numbers
 			return df.format(dNum).replace('E', 'e');

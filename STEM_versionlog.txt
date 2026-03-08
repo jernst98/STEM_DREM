@@ -1,0 +1,259 @@
+Version 1.3.14 Release 3/8/2026
+* Updated the set of integrated GO annotations available in STEM
+* Fixed broken download links associated with some GO annotations and the Gene Ontology file
+
+Version 1.3.13 Release 7/5/2020
+*Fixed bug in handling situation when last time point in one replicate is missing
+*Prints to console message when running Gene Ontology enrichment instead
+of usual STEM cluster since only one or two tab delimited columns
+*Fixed command line usage message in STEM
+
+Version 1.3.12 Release 6/23/2019
+*Updated STEM to handle changes to the GO which had caused some download
+links to be broken
+*Slight adjustments to GUI to remove some parts being cutoff in recent Java versions
+*Clarified in manual batch mode still needs to be run with a computer with a display
+
+Version 1.3.11 Release 12/26/2016
+*Fixed issue in which profile interface was appearing
+as blank without resizing the window on macs
+
+Version 1.3.10 Release 11/24/2016
+*Fixed bug when running a batch GO analysis ('-o option included') that
+could cause no output to be produced in certain cases.
+
+Version 1.3.9 Release 9/10/2016
+*Changed license on STEM so now it is GPL v3.0
+*updated/added/removed entries and filenames in the GO list to be current 
+*removed automatic download of gene locations for chromosome viewer
+since was not supported by the site previously downloading it from
+*fixed a bug causing the 'Name' field in the chromosome viewer not to be parsed.
+Only 'ID' and 'Alias' fields were parsed
+*fixed an obsucre bug that occurs when sorting profiles when doing GO analysis
+and sorting profiles based on few genes 
+
+Version 1.3.8 Release 2/24/2012
+*Added the ability to save the main interface as a svg by clicking the disk icon and giving a .svg extension
+*Removed default cross-references as no longer valid
+
+Version 1.3.7 Release 1/1/2011
+*Added fold enrichments to GO tables. This is the observed number of genes divided by the expected.
+*Added a feature to run GO enrichments for a batch set of genes and output to a text file. This can be done with the 
+flag -o GOoutfile.txt when launching STEM from a command line. All the gene sets should be in one file with a '#' header
+line to denote breaks between gene sets. GOoutfile.txt is the file where the GO output will be written.  
+*Updated list of GO annotations available for download
+*Filter NOT modified annotations in annotation files (effects a very small percentage of annotations)
+*Behind the scenes reorganization of code
+
+Version 1.3.6 Release 7/31/2009
+* Changed annotation downloads from the geneontology from being ftp based
+to being http to fix connection problems.
+
+Version 1.3.5 Release 7/11/2009
+Updated the GO and Cross-reference list. Human cross reference file is no longer
+available for automatic download. Also specifying location files based on GO category
+selections is no longer the default action of the interface. All changes 
+were in stem\ST.java
+
+Version 1.3.4 Release 1/15/2009
+Source code released. Behind the scenes reorganization of code.
+
+Version 1.3.3. Release 8/10/2008
+*Fixed bug that caused profile vector not to be saved correctly in the headerwhen saving a gene table.
+*Fixed bug causing gene chromosome locations not to be downloaded correctly for some species.
+*Removed ipi and vega from biomart_species.txt file.
+
+Version 1.3.2 Release 5/5/2008
+*Fixed bug that sometimes caused repeat files not to be listed on repeat 
+interface when loading them from a defaults file through STEM interface
+
+Version 1.3.1 Release 3/31/2008
+*Updated STEM so that it could parse the latest gene ontology files which 
+now have the regulates relationship between some categories.
+
+Version 1.3 Release 2/18/2008
+1. Added a chromosome viewer integrated into STEM - see manual for more 
+details
+2. Added the option to save settings and load them directly into STEM.
+Settings are saved through the disk icon on the STEM interface, and then 
+loaded into STEM through the "Load Saved Settings" button on the input 
+interface.
+3. Added the option to display y-axis tick marks on the main input 
+interface when plotting genes. Also added the option not to display the 
+profile ID, model profile, line, or ordering details on the main 
+interface.
+4. Added the option to run STEM in batch from the command line
+5. Corrected the STEM documentation on the filtering "Minimum Correlation 
+between Repeats" parameter, in the case of three or more repeats the 
+criteria is based on the pairwise mean, not the median
+6. Fixed bug that prevented real time spacing from being recogonized in 
+the defaults file
+6. Removed the
+"-ms512M" option to start STEM from the cmd files
+
+Version 1.2.2b Released 10/13/2006
+1. Fixed bug in the display of p-values that were extremely close to 0 
+(<~10^-300), but not exactly 0.  In Java 1.5 they were being displayed as 
+Infinity to some large negative power, and in Java 1.4 they were being 
+displayed as a really long number to some power.
+
+Version 1.2.1b Released 9/18/2006
+1. A memory leak was fixed which previously could have caused STEM to run 
+slower when executing it multiple times without restarting Java
+
+Version 1.2.0b Released 9/5/2006
+Added several interface options which can be accessed on the main 
+interface window (see also http://www.cs.cmu.edu/~jernst/stem/newoptions.html).  These 
+options allow:
+1.  All non-filtered genes expression profiles to be displayed on the main 
+interface
+2.  Just gene expression profiles of a given GO category or gene set to be 
+displayed on the main interface
+3.  The x-axis on the main interface and detail profile windows (cluster 
+windows for k-means) to be scaled based on the real sampling rate, 
+previously all time points could only be uniformly spaced
+4.  The scale of y-axis of the detail profile windows (cluster windows for 
+k-means) to be fixed to user defined parameters, previously the only 
+option would be for STEM to determine each one automatically
+
+Version 1.1.3b Released 8/13/2006
+1. Added buttons to all tables to copy the content of the tables
+to the clipboard.  Also can copy just the gene names to the clipboard
+for gene tables.
+2. Fixed a bug in the printing of the header of GO Category gene tables 
+when saving to a file
+3. Added back to the list of GO annotations Glossina morsitans (Sanger 
+GeneDB). Added Pseudomonas aeruginosa PA01 (PseduoCap) to the list of GO 
+annotation sources.
+
+Version 1.1.2b Released 4/26/2006
+1. Minor bug fixed in computing expected counts.  If a gene could match 
+multiple profiles equally well during a permutation, which usually only 
+happens if genes with missing data are not filtered, then the expected 
+counts were slightly lower than they should have been.
+
+Version 1.1.1b Released 4/25/2006 
+1.  STEM now has a new default gene filtering criteria.  Under the new 
+filtering criteria called 'Maximum-Minimum' a gene is filtered if the 
+difference between its largest value and its smallest value after 
+transformation (Log normalize data, Normalize data, or No 
+normalization/add 0) is less than the value of the 'Minimum Absolute 
+Expression Change Parameter'.  The original filtering criteria, based on 
+the absolute expression change from time point 0, is now called 
+'Difference from 0' and can be specified under the 'Change should be based 
+on' option.  The 'Maximum-Minimum' filtering criteria has the property 
+that the set of genes that would be filtered is invariant to permuting the 
+order of time points, which is not necessarily true under the 'Difference 
+from 0' filtering criteria.  The 'Maximum-Minimum' filtering criteria is 
+thus arguably a more appropriate filtering criteria to use in
+conjunction with STEM's permutation test.
+2.  STEM now has the option under Advanced Options-->Model Profiles for 
+its permutation test not to permute time point 0.  The permutation test is 
+used to computed the expected number of genes assigned to a profile.  
+Previously and still the default option in STEM is for the permutation 
+test to compute the expected counts based on a permutation of all time 
+points.  This is generally the preferred method since it can detect 
+important changes between time point 0 and the immediate next sampled time 
+point.  However for some experimental designs particularly two channel 
+experiments where time point 0 serves as the reference sample, not 
+permuting time point 0 is also useful.  The reason is that the asymmetry 
+in the experimental design will allow a gene's time point 0 value 
+expression value before any transformation to be known with lower variance 
+than the other time points, and this difference can cause some profiles to 
+be more likely to be significant when permuting time point 0.  When not 
+permuting time point 0, profiles found significant are significant 
+independent of the asymmetry in the experimental design between time point 
+0 and the other time points.
+3.  A bug was fixed that caused some genes not to be filtered that should 
+have been based on the absolute expression change parameter.  This bug 
+only occurred when allowing genes with missing data, choosing log 
+normalize or normalize data, and having no repeats.  Only genes with 
+missing data could have incorrectly slipped through filter, and only a 
+smaller percent would probably actually have done so.
+4.  The error messages for parsing the defaults file was improved in a few 
+places.
+
+Version 1.1.0b Released 3/20/2006
+1.  STEM now provides an implementation of k-means algorithm in addition 
+to the still default STEM clustering method designed for short time series 
+gene expression data published in the Bioinformatics/ISMB 2005 paper.
+2.  Extremely small p-values are computed almost exactly, previously any 
+p-value below 10^-12 was returned as 0.
+3.  Added Cow (EBI) to the list of GO annotation sources and removed 
+Glossina morsitans (Sanger GeneDB) which was no longer active on the GO 
+ftp site
+4.  When a table window is maximized all extra window area is now given to 
+the table instead of some to the button panel
+5.  When comparing two data sets it is now possible to automatically load 
+in the define gene set dialog box the set of genes filtered in the other 
+data set by setting the profile ID value to "-1" and pressing "Select 
+Genes".
+6.  Changed the default start memory option for STEM from -ms1024M to 
+-ms512M in the STEM command files.
+ 
+Version 1.0.7b Released 1/5/2006
+1.  When comparing data sets there is again the option to display gene and
+GO tables based on the set of genes in the intersection of two profiles.
+When querying a user defined gene set there is again the option to display
+gene and GO tables based on the set of genes in the intersection of the
+user defined gene set and the set of genes assigned to a profile or
+cluster of profiles.  These options are described in the user manual, and
+appeared in STEM before the release of version 1.04b when they were
+inadvertently removed.
+2.  If the window containing the graph of the genes assigned to a model
+profile is resized, then the graph of the genes is now rescaled
+accordingly.
+3.  If the "Order Profiles By" window or the "Order Clusters By"
+window is open, but minimized, pressing its corresponding button on the
+main interface now makes the window visible again.  Previously there would
+be no response when pressing the button in that situation.
+4.  If STEM cannot save the contents of a table to a file because another
+application has a write lock on the file, then a new window containing an
+error message now pops up.  Previously the error message was just printed
+to the console window.
+
+Version 1.0.6b Released 11/21/2005
+1.  Bug fixed that prevented GO results from being displayed on computers 
+that default to a language for which numbers have a ',' in places in the 
+English system where there is a '.' (e.g. 3,21 instead of 3.21).
+2.  All numbers in tables are now displayed under the English system
+
+Version 1.0.5b Released 11/1/2005 
+1. Bug fixed that could in certain circumstances cause STEM not to use all 
+available Gene Ontology (GO) annotations.  If a gene symbol in an official 
+15 column annotation files had a lower case letter in it and matched a 
+gene symbol in the data file, STEM incorrectly did not use the annotation.  
+This bug however does not effect the EBI cross references. This bug also 
+does not affect users providing their own two column gene annotation 
+files.  
+2. Removed reference to the defunct GenBank (Compugen), Gene Index 
+(TIGR), and UniProt (Compugen) annotation sources.  Update reference to TIGR and 
+TAIR annotations for Arabidopsis thaliana to reflect they are now merged 
+into one file.
+
+Version 1.0.4b Released 10/25/2005 
+1.  Bug fixed that caused the advanced options help info windows not to be 
+closeable until the advanced options dialog window was closed.  This bug 
+only appears when using Java 1.5, and was not present with Java 1.4. 
+2.  Slight changes to the color scheme for significant model profiles 
+3.  Changed the sample comparison data file included with STEM
+
+Version 1.0.3b Released 7/17/2005
+1.  The parsing algorithm of the gene ontology file was modified 
+internally. The algorithm previously relied on assumptions about the 
+format of the file which is and has been true, but are not documented to 
+necessarily be the case in the future.  These changes currently have no 
+visible effect.  Also more informative error messages were added in the 
+event there are problems parsing the gene ontology file.
+
+Version 1.0.2b Released 7/15/2005
+1.  Bug fixed in parsing the very last category term in the gene ontology 
+file. This was causing a null pointer exception to be thrown with the 
+settings specified in defaultsGuilleminSample.txt and the latest 
+ontology, but was not noticeable with previous versions of the ontology.
+
+Version 1.0.1b Released 7/1/2005
+1.  Bug fixed allowing the gene table for a GO category to now be saved 
+when doing a GO enrichment analysis on non-time series data.
+
+Version 1.0.0b Released 6/24/2005

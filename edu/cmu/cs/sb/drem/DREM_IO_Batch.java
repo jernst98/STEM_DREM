@@ -9,6 +9,7 @@ import java.awt.image.*;
 import java.text.*;
 import java.lang.reflect.*;
 import java.net.*;
+import java.math.*;
 
 /**
  * Class implementing the main input interface
@@ -181,15 +182,25 @@ public class DREM_IO_Batch {
 	String[] staticsourceArray = { "User provided" };
 
 	String szoutmodelfile;
+        String szgeneassignfile;
+        String szTFDIR;
 
-	public DREM_IO_Batch(String szDefaultFile, String szoutmodelfile) {
-		this(szDefaultFile, null, szoutmodelfile);
+    public DREM_IO_Batch(String szDefaultFile, String szoutmodelfile) {
+	this(szDefaultFile, null, szoutmodelfile);
 	}
 
 	// sdremBindingFile is set by the DREMInterface class in SDREM
 	public DREM_IO_Batch(String szDefaultFile, String sdremBindingFile,
 			String szoutmodelfile) {
+	    this(szDefaultFile, sdremBindingFile, szoutmodelfile,null,null);
+	}
 
+
+	public DREM_IO_Batch(String szDefaultFile, String sdremBindingFile,
+			     String szoutmodelfile,String szgeneassignfile, String szTFDIR) {
+	
+	    this.szgeneassignfile = szgeneassignfile;
+	    this.szTFDIR = szTFDIR;
 		File dir = new File(SZSTATICDIR);
 
 		String[] children = dir.list();
@@ -1270,6 +1281,40 @@ public class DREM_IO_Batch {
 				pw.print(fthetimehmm.saveString(fthetimehmm.treeptr));
 				pw.close();
 
+				if (szgeneassignfile!=null)
+				{
+				    //added to print gene info
+				    PrintWriter pwgeneinfo = new PrintWriter(new FileWriter(szgeneassignfile));
+				    for (int ngene = 0; ngene < fthetimehmm.storedbestpath.length; ngene++)
+				    {
+					DREM_Timeiohmm.Treenode node = fthetimehmm.treeptr;
+					pwgeneinfo.print(fthetimehmm.theDataSet.genenames[ngene]+"\t"+fthetimehmm.storedbestpath[ngene]);
+					int nt = 0;
+					BigInteger path = fthetimehmm.storedbestpath[ngene];
+					while (node.numchildren != 0)
+					{
+
+					    int nextindex = path.divide(
+									new BigInteger("" + fthetimehmm.nmaxchild)
+									.pow(fthetimehmm.numcols - nt - 1)).mod(
+								  new BigInteger("" + fthetimehmm.nmaxchild)).intValue();
+					    node = node.nextptr[nextindex];
+					    nt++;
+					    pwgeneinfo.print("\t"+node.dmean);
+					}
+					pwgeneinfo.println();
+				    }
+				    pwgeneinfo.close();
+				}
+
+				if (szTFDIR != null)
+				{
+				    printSplitTables(fthetimehmm, fthetimehmm.treeptr,0);
+				    printEdgeTables(fthetimehmm, fthetimehmm.treeptr,0);
+				    //now output TF gene info here
+
+				}
+
 				// Only need to save the activity scores when running SDREM
 				if(fthetimehmm.regPriorsFile != null && !fthetimehmm.regPriorsFile.equals(""))
 				{
@@ -1290,5 +1335,157 @@ public class DREM_IO_Batch {
 			System.out.println("Time: " + (e1 - s1) + "ms");
 		}
 	}
+
+
+    //ptr.dpvalEdgeSplit[nchild][nrowindex]
+    public void printEdgeTables(DREM_Timeiohmm ftimehmm, DREM_Timeiohmm.Treenode theTreeNode, int ndepth) throws IOException
+        {
+	    if (theTreeNode != null)
+	    {
+		NumberFormat nf3 = NumberFormat.getInstance(Locale.ENGLISH);
+		nf3.setMinimumFractionDigits(3);
+		nf3.setMaximumFractionDigits(3);
+		for (int ni = 0; ni < theTreeNode.nextptr.length ; ni++)
+		{
+		    /*
+		    if (theTreeNode.numchildren == 2)
+		    {
+			PrintWriter pw = new PrintWriter(szTFDIR+"/edgesplit_"+theTreeNode.dmean+"_"+theTreeNode.dsigma+"_"+ndepth+"_0.txt");
+			pw.println("TF\tscore");
+		       for (int nb = 0; nb < theTreeNode.dpvals.length; nb++)
+		       {
+		          pw.println(ftimehmm.bindingData.regNames[nb]+"\t"+theTreeNode.dpvals[nb][0]);
+		       }
+		       pw.close();
+		    }
+		    */
+		    if (theTreeNode.numchildren >= 2)
+		    {		    
+			for (int na = 0; na < theTreeNode.numchildren; na++)
+			{
+			    PrintWriter pw = new PrintWriter(szTFDIR+"/path_"+ndepth+"_"+nf3.format(theTreeNode.dmean)+"_"+nf3.format(theTreeNode.dsigma)+"_to_"+nf3.format(theTreeNode.nextptr[na].dmean)
+                                                             +"_"+nf3.format(theTreeNode.nextptr[na].dsigma)+".txt");
+
+			    String[] columnNames = DREMGui_EdgeTable.edgeTableColumnNames(ftimehmm, theTreeNode);
+			    String[][] tableData = DREMGui_EdgeTable.edgeTableTableData(ftimehmm, theTreeNode, na, columnNames);
+			    //pw.println("TF\tDiff. Split\tscore");
+
+			    pw.print(columnNames[0]);
+			    for (int nb = 1; nb < columnNames.length; nb++)
+			    {
+				pw.print("\t"+columnNames[nb]);
+			    }
+			    pw.println();
+
+
+			    for (int nb = 0; nb < tableData.length; nb++)
+			    {
+			       pw.print(tableData[nb][0]);
+			       for (int nc = 1; nc < tableData[nb].length; nc++)
+			       {
+			          pw.print("\t"+tableData[nb][nc]);
+			       }
+			       pw.println();
+			    }
+
+
+			    /*
+		           for (int nb = 0; nb < theTreeNode.dpvals.length; nb++)
+		           {
+			       pw.println(ftimehmm.bindingData.regNames[nb]+"\t"+theTreeNode.ddiffEdgeSplit[na][nb]+"\t"+theTreeNode.dpvalEdgeSplit[na][nb]);//nrowindex]);//dpvals[nb][na]);
+			   }
+			    */
+			   pw.close();
+			} 
+		    //}
+		    }
+		    printEdgeTables(ftimehmm, theTreeNode.nextptr[ni],ndepth+1);
+		}
+	    }
+        }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    public void printSplitTables(DREM_Timeiohmm ftimehmm, DREM_Timeiohmm.Treenode theTreeNode, int ndepth) throws IOException
+        {
+	    if (theTreeNode != null)
+	    {
+	        NumberFormat nf3 = NumberFormat.getInstance(Locale.ENGLISH);
+	        nf3.setMinimumFractionDigits(3);
+	        nf3.setMaximumFractionDigits(3);
+
+		for (int ni = 0; ni < theTreeNode.nextptr.length ; ni++)
+		{
+		    if (theTreeNode.numchildren == 2)
+		    {
+			PrintWriter pw = new PrintWriter(szTFDIR+"/split_"+ndepth+"_"+nf3.format(theTreeNode.dmean)+"_"+nf3.format(theTreeNode.dsigma)+"_2way.txt");
+
+			String[] columnNames = DREMGui_SplitTable.splitTableColumnNames2WAY(ftimehmm, theTreeNode);
+			String[][] tableData = DREMGui_SplitTable.splitTableTableData2WAY(ftimehmm, theTreeNode, columnNames);
+			    //pw.println("TF\tDiff. Split\tscore");
+
+			pw.print(columnNames[0]);
+		        for (int nb = 1; nb < columnNames.length; nb++)
+		        {
+			    pw.print("\t"+columnNames[nb]);
+			}
+			pw.println();
+
+			for (int nb = 0; nb < tableData.length; nb++)
+		        {
+			    pw.print(tableData[nb][0]);
+			    for (int nc = 1; nc < tableData[nb].length; nc++)
+			    {
+				pw.print("\t"+tableData[nb][nc]);
+			    }
+			    pw.println();
+			}
+			pw.close();
+		    }
+		    else if (theTreeNode.numchildren >= 3)
+		    {
+			for (int na = 0; na < theTreeNode.numchildren; na++)
+			{
+			    PrintWriter pw = new PrintWriter(szTFDIR+"/split_"+ndepth+"_"+nf3.format(theTreeNode.dmean)+"_"+nf3.format(theTreeNode.dsigma)+"_to_"+
+							     nf3.format(theTreeNode.nextptr[theTreeNode.orderA[na]].dmean)+"_"+nf3.format(theTreeNode.nextptr[theTreeNode.orderA[na]].dsigma)+"_vsOthers.txt");
+
+
+			    String[] columnNames = DREMGui_SplitTable.splitTableColumnNamesGreater2WAY(ftimehmm, theTreeNode, na);
+			    String[][] tableData = DREMGui_SplitTable.splitTableTableDataGreater2WAY(ftimehmm, theTreeNode, theTreeNode.orderA[na], columnNames);
+			    //pw.println("TF\tDiff. Split\tscore");
+
+			    pw.print(columnNames[0]);
+			    for (int nb = 1; nb < columnNames.length; nb++)
+			    {
+				pw.print("\t"+columnNames[nb]);
+			    }
+			    pw.println();
+
+
+			    for (int nb = 0; nb < tableData.length; nb++)
+			    {
+			       pw.print(tableData[nb][0]);
+			       for (int nc = 1; nc < tableData[nb].length; nc++)
+			       {
+			          pw.print("\t"+tableData[nb][nc]);
+			       }
+			       pw.println();
+			    }
+
+
+			    //pw.println("TF\tDiff\tScore");
+			    //for (int nb = 0; nb < theTreeNode.dpvals.length; nb++)
+			    //{
+			    //pw.println(ftimehmm.bindingData.regNames[nb]+"\t"+theTreeNode.ddiff[nb][na]+"\t"+theTreeNode.dpvals[nb][na]);
+			    //}
+			   pw.close();
+			} 
+		    }
+		    printSplitTables(ftimehmm, theTreeNode.nextptr[ni],ndepth+1);
+		}
+	    }
+        }
 
 }

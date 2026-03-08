@@ -1735,7 +1735,8 @@ public class DREMGui extends PFrame implements ComponentListener {
 					for (Object otext : smallrect.getChildrenReference()) {
 						PNode text = (PNode) otext;
 						text.setVisible(true);
-						text.setPickable(true);
+						text.setPickable(false); //changed in 2.0.6 to prevent label text from being movable
+						//text.setPickable(true);
 					}
 				}
 			}

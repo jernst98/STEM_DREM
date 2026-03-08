@@ -23,24 +23,24 @@ public class GoAnnotations {
 			"User provided",
 			"No annotations",
 			//"Anaplasma phagocytophilum HZ (JCVI)",
-			"Agrobacterium tumefaciensstr. C58 (PAMGO)",// new atumefaciens
+			//"Agrobacterium tumefaciensstr. C58 (PAMGO)",// new atumefaciens
 			"Arabidopsis (EBI)",
 			"Arabidopsis thaliana (TAIR)",
-			"Aspergillus nidulans (AspGD)",// new aspgd.gz
+			//"Aspergillus nidulans (AspGD)",// new aspgd.gz
 			//"Bacillus anthracis (JCVI)",
 			"Caenorhabditis elegans (WormBase)",
 			//"Campylobacter jejuni RM1221 (JCVI)",
 			"Candida albicans (CGD)",
 			//"Carboxydothermus hydrogenoformans Z-2901 (JCVI)",
 			"Chicken (EBI)",
-			"Comprehensive Microbial Resource (JCVI)",
+			//"Comprehensive Microbial Resource (JCVI)",
 			//"Clostridium perfringens ATCC13124 (JCVI)",// new cperfringens
 			//"Colwellia psychrerythraea 34H (JCVI)",// new cpsychreythrea
 			"Cow (EBI)",
 			//"Coxiella burnetti RSA (JCVI)",
 			"Danio rerio (ZFIN)",
 			//"Dehalococcoides ethenogenes 195 (JCVI)",
-			"Dickeya dadantii (PAMGO)", // added version 1.3.7
+			//"Dickeya dadantii (PAMGO)", // added version 1.3.7
 			"Dictyostelim discoideum (DictyBase)",// now dictyBase.gz
 			"Dog (EBI)",//new DOG EBI
 
@@ -54,12 +54,12 @@ public class GoAnnotations {
 			//"Hyphomonas neptunium ATCC 15444 (JCVI)",// new hneptunium
 			"Leishmania major (Sanger GeneDB)",
 			//"Listeria monocytogenes 4b F2365 (JCVI)",
-			"Magnaporthe grisea (PAMGO)",// new mgrisea
+			//"Magnaporthe grisea (PAMGO)",// new mgrisea
 			//"Methylococcus capsulatus Bath (JCVI)",
 			"Mouse (EBI)",
 			"Mus musculus (MGI)",
 			//"Neorickettsia sennetsu Miyayama (JCVI)",
-			"Oomycetes (PAMGO)", // new oomycetes
+			//"Oomycetes (PAMGO)", // new oomycetes
 			"Oryza sativa (Gramene)",
 			"PDB (EBI)",
 			"Pig (EBI)", //new
@@ -72,6 +72,7 @@ public class GoAnnotations {
 			"Rattus norvegicus (RGD)",
 			"Reactome (CSHL&EBI)",// new reactome
 			"Saccharomyces cerevisiae (SGD)",
+			"Schizosaccharomyces japonicus (JaponicusDB)",
 			"Schizosaccharomyces pombe (Sanger GeneDB)",
 			//"Shewanella oneidensis MR-1 (JCVI)",
 			//"Silicibacter pomeroyi DSS-3 (JCVI)", 
@@ -80,6 +81,7 @@ public class GoAnnotations {
 			// "Trypanosoma brucei chr 2 (JCVI)", removed no longer available
 			//"UniProt (EBI)",
 			"Worm (EBI)", // new
+			"Xenopus (Xenbase (tropicalis))", 
 			"Yeast (EBI)", // new
 			// "UniProt no IEA (EBI)", //new uniprot_noiea
 			//"Vibrio cholera (JCVI)", 
@@ -95,14 +97,15 @@ public class GoAnnotations {
        public static String[] xreforgfile = { //"",
 	   // "", 
 	   //"", 
-	                "",
+	   // "",
 	   "", "", "", "", "", "", "", "",
 			"", "", "", "", "", "", "", "", "", "",
-	   "", "", "", "",
+	   "", "", //"", //"",
 			"",// removed 7/5/09 human xrefs no longer
 				// supported"human.xrefs.gz",
-			"", "", "", "", "", "", "", "", "", "", "", "", "",
-			"", "", 
+	   "", "", "", "", "", "", "", "", "", "", "",// "",// "",
+	   //"",// "", 
+	   "","",""
 			//"", "", "", "", "", "", "", "", "", "",
 			// "",
 			//"", "" 
@@ -112,24 +115,24 @@ public class GoAnnotations {
 			"",
 			"",
 			//SZGP + "jcvi_Aphagocytophilum.gz",
-			SZGP + "pamgo_atumefaciens.gaf.gz",// new
+			//SZGP + "pamgo_atumefaciens.gaf.gz",// new
 			"goa_arabidopsis.gaf.gz",
 			SZGP + "tair.gaf.gz",
-			SZGP + "aspgd.gaf.gz",// new
+			//SZGP + "aspgd.gaf.gz",// new
 			//SZGP + "jcvi_Banthracis.gz",
 			SZGP + "wb.gaf.gz",
 			//SZGP + "jcvi_Cjejuni.gz",
 			SZGP + "cgd.gaf.gz",
 			//SZGP + "jcvi_Chydrogenoformans.gz",
 			"goa_chicken.gaf.gz",
-			SZGP+"jcvi.gaf.gz",
+			//SZGP+"jcvi.gaf.gz",
 			//SZGP + "jcvi_Cperfringens.gz", // new
 			//SZGP + "jcvi_Cpsychrerythraea.gz", // new
 			"goa_cow.gaf.gz",
 			//SZGP + "jcvi_Cburnetii.gz",
 			SZGP + "zfin.gaf.gz",
 			//SZGP + "jcvi_Dethenogenes.gz",
-			SZGP + "pamgo_ddadantii.gaf.gz",
+			//SZGP + "pamgo_ddadantii.gaf.gz",
 			SZGP + "dictybase.gaf.gz",// new SZGP+"ddb.gz",
 			"goa_dog.gaf.gz",
 			SZGP + "fb.gaf.gz",
@@ -142,12 +145,12 @@ public class GoAnnotations {
 			//SZGP + "jcvi_Hneptunium.gz",// new
 			SZGP + "genedb_lmajor.gaf.gz",
 			//SZGP + "jcvi_Lmonocytogenes.gz",
-			SZGP + "pamgo_mgrisea.gaf.gz",// new
+			//SZGP + "pamgo_mgrisea.gaf.gz",// new
 			//SZGP + "jcvi_Mcapsulatus.gz",
 			"goa_mouse.gaf.gz",
 			SZGP + "mgi.gaf.gz",
 			//SZGP + "jcvi_Nsennetsu.gz",
-			SZGP + "pamgo_oomycetes.gaf.gz",// new
+			//SZGP + "pamgo_oomycetes.gaf.gz",// new
 			SZGP + "gramene_oryza.gaf.gz",
 			"goa_pdb.gaf.gz",
 			"goa_pig.gaf.gz",
@@ -160,6 +163,7 @@ public class GoAnnotations {
 			SZGP + "rgd.gaf.gz",
 			SZGP + "reactome.gaf.gz",// new
 			SZGP + "sgd.gaf.gz", 
+			SZGP + "japonicusdb.gaf.gz",
                         SZGP + "pombase.gaf.gz",//updated from "GeneDB_Spombe.gz",
 			//SZGP + "jcvi_Soneidensis.gz", SZGP + "jcvi_Spomeroyi.gz",
 			SZGP + "sgn.gaf.gz",// new
@@ -167,6 +171,7 @@ public class GoAnnotations {
 			// SZGP+"tigr_Tbrucei_chr2.gz",
 			//"goa_uniprot_all.gaf.gz",
 			"goa_worm.gaf.gz",
+			SZGP + "xenbase.gaf.gz",
 			"goa_yeast.gaf.gz",
 			// SZGP+"goa_uniprot_noiea.gz",
 			//SZGP + "jcvi_Vcholerae.gz", 
@@ -831,6 +836,7 @@ public class GoAnnotations {
 			if (szLine == null) {
 				throw new IllegalArgumentException("Annotation file is empty!");
 			} else {
+			    // System.out.println("*"+szLine+"*");
 				while ((szLine.equals("")) || (szLine.startsWith("!"))) {
 					// reads blank lines and those that start with !
 					szLine = br.readLine();

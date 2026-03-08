@@ -4132,11 +4132,11 @@ public class ST extends JFrame implements ActionListener
        }
        else if (esource == infoButton)
        {
-           String szMessage = "This is version 1.3.13 of the Short Time-series Expression Miner (STEM).\n\n"+
+           String szMessage = "This is version 1.3.14 of the Short Time-series Expression Miner (STEM).\n\n"+
                        "The Short Time-series Expression Miner (STEM) was developed by Jason Ernst, "+
                        "Dima Patek, and Ziv Bar-Joseph. " +
                        "Any questions or bugs found should "+
-	               "be emailed to Jason Ernst (jernst@cs.cmu.edu).";
+	               "be emailed to Jason Ernst (jason.ernst@ucla.edu).";
    
 	   Util.renderDialog(this,szMessage,50,100,"Information");
        }
@@ -4266,7 +4266,7 @@ public class ST extends JFrame implements ActionListener
 	     {
 		 //szurl ="ftp://ftp.geneontology.org/go/gene-associations/"+szfile;
 		 //changed in 1.3.6 to access http site instead of ftp
-		 szurl ="http://current.geneontology.org/annotations/"+szfile; //"http://www.geneontology.org/gene-associations/"+szfile;
+		 szurl ="https://current.geneontology.org/annotations/"+szfile; //"http://www.geneontology.org/gene-associations/"+szfile;
 	     }
 	  }
           else if (ntype == 1)
@@ -4308,7 +4308,8 @@ public class ST extends JFrame implements ActionListener
 	  }
           else 
           {
-	      szurl = "http://purl.obolibrary.org/obo/go/go-basic.obo";//"http://www.geneontology.org/ontology/gene_ontology.obo";
+	      szurl = "https://current.geneontology.org/ontology/go-basic.obo";
+	      //http://purl.obolibrary.org/obo/go/go-basic.obo";//"http://www.geneontology.org/ontology/gene_ontology.obo";
           }
 
           final String szurlf = szurl;
@@ -4573,7 +4574,7 @@ public class ST extends JFrame implements ActionListener
                "all evidence codes are assumed to be acceptable.  Evidence code symbols include "+
                "IEA, IC, IDA, IEP, IGI, IMP, IPI, ISS, RCA, NAS, ND, TAS, and NR.  "+
                "Information about GO evidence codes can be found at "+
-               "http://geneontology.org/docs/guide-go-evidence-codes/.  Note that this field only applies "+
+               "https://geneontology.org/docs/guide-go-evidence-codes/.  Note that this field only applies "+
                "if the gene annotations are in the official 15 column GO annotation format.  "+
                "The evidence code is the entry in column 7.  "+
                "For example to exclude the annotations that were inferred from electronic annotation "+
@@ -4770,7 +4771,7 @@ public class ST extends JFrame implements ActionListener
 	   szMessage = "This file contains the Gene Ontology (GO) annotations of genes.  "+
                        "The file can be in one of two formats:\n\n"+
                        "1.  The file can be in the official 15 column or more GO Annotation format "+
-                       "described at http://geneontology.org/docs/go-annotation-file-gaf-format-2.0/.  In this case any entry in the "+
+                       "described at https://geneontology.org/docs/go-annotation-file-gaf-format-2.0/.  In this case any entry in the "+
                        "DB_Object_ID (Column 2), DB_Object_Symbol (Column 3), DB_Object_Name (Column 10), or "+
                        "DB_Object_Synonym (Column 11) fields matching a spot ID or gene symbol in the data set "+ 
                        "will be annotated as belonging to GO ID (Column 5).  "+
@@ -4785,7 +4786,7 @@ public class ST extends JFrame implements ActionListener
                        "annotated as belonging to the GO category in Column 5.  "+
                        "Note that the exact content of the 'DB_Object_ID', 'DB_Object_Symbol', "+
                        "'DB_Object_Name', and 'DB_Object_Synonym' varies between annotation source, "+ 
-                       "consult the README files available at http://current.geneontology.org/products/pages/downloads.html "+
+                       "consult the README files available at https://current.geneontology.org/products/pages/downloads.html "+
 	       "to find out more information about the content of these fields for a specific annotation source.\n\n"+
 
                        "2.  Alternatively the file can have two columns where the first column contains gene symbols "+
@@ -5058,7 +5059,7 @@ public class ST extends JFrame implements ActionListener
                       "the file cannot be downloaded automatically.  If the annotation file is not present locally it "+
                       "must be downloaded and thus the 'Annotation' check box will automatically be marked.  "+
                       "Gene annotation files are downloaded from "+
-                      "http://current.geneontology.org/annotations/ unless it is "+
+                      "https://current.geneontology.org/annotations/ unless it is "+
 	      //"ftp://ftp.geneontology.org/go/gene-associations/ unless it is "+
                       "an EBI data source in which case it will be downloaded from "+
                       "ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/.\n\n"+
@@ -5073,7 +5074,8 @@ public class ST extends JFrame implements ActionListener
                       "*The 'Ontology' checkbox corresponds to the gene "+
                       "ontology specified in the go-basic.obo file.  It must be present if a non-user provided "+
 	              "annotation source is selected, otherwise an attempt to download the file from "+
-                      "http://purl.obolibrary.org/obo/go/go-basic.obo will be made. \n\nCurrently:\n";
+                      "https://current.geneontology.org/ontology/go-basic.obo will be made. \n\nCurrently:\n";
+	  //removed URL http://purl.obolibrary.org/obo/go/go-basic.obo
 	   szxrefval = xrefField.getText();
            szgoval =  goField.getText();
 
@@ -5147,7 +5149,7 @@ public class ST extends JFrame implements ActionListener
 	 szMessage = "The user can either select to provide their own gene annotation file ('User provided'), "+
                      "'No annotations', or use one of 37 gene annotation files available from the Gene Ontology "+
                      "Consortium.  More information about these 37 annotation files can be found here "+
-                     "http://current.geneontology.org/products/pages/downloads.html and in the case of "+
+                     "https://current.geneontology.org/products/pages/downloads.html and in the case of "+
                      "annotations from the European Bioinformatics Institue (EBI) also here http://www.ebi.ac.uk/GOA/.  "+
 	             "If one of the predefined annotation files "+
                      "is selected then the annotation field will automatically be filled in and the option will be "+

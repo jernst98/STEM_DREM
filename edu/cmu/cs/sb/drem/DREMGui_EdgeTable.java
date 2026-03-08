@@ -39,7 +39,7 @@ public class DREMGui_EdgeTable extends JPanel implements ActionListener {
 	final static Color bgColor = Color.white;
 	final static Color fgColor = Color.black;
 	DREMGui_FilterStaticModel hmst;
-	int numrows;
+        int numrows;
 	DREM_Timeiohmm.Treenode ptr;
 	// int npathID;
 	BigInteger npathID;
@@ -47,8 +47,128 @@ public class DREMGui_EdgeTable extends JPanel implements ActionListener {
 	int ndepth;
 	NumberFormat nf;
 	NumberFormat nf2;
-	boolean bsplit;
+        boolean bsplit;
 	boolean broot;
+
+
+       /**
+       * Static class for loading edge table column names added to accomodate batch mode, but in future may want GUI to access this way
+       */
+        public static String[] edgeTableColumnNames(DREM_Timeiohmm theTimeiohmm,DREM_Timeiohmm.Treenode ptr)
+        {
+	    int numtf = theTimeiohmm.bindingData.regNames.length;
+	    int nsize = theTimeiohmm.bindingData.signedBindingValuesUnsorted.size();
+		
+             if (theTimeiohmm.bindingData.signedBindingValuesUnsorted
+				.contains(new Integer(0))) {
+			nsize--;
+	     }
+	     int numrows = numtf * nsize;
+
+	     boolean bsplit = ptr.numchildren >= 2;
+	     String[] columnNames  = null;
+	     int nsplitoffset;
+	     if (bsplit) {
+		        columnNames = new String[11];
+			nsplitoffset = 1;
+			columnNames[2] = "Num Parent";
+			columnNames[7] = "Expect Split";
+			columnNames[8] = "Diff. Split";
+			columnNames[9] = "Score Split";
+			columnNames[10] = "% Split";
+	      } else {
+			nsplitoffset = 0;
+			columnNames = new String[6];
+	     }
+
+	     String[][] tabledata = new String[numrows][columnNames.length];
+	     columnNames[0] = "TF";
+	     columnNames[1] = "Num Total";
+	     columnNames[2 + nsplitoffset] = "Num Path";
+	     columnNames[3 + nsplitoffset] = "Expect Overall";
+	     columnNames[4 + nsplitoffset] = "Diff. Overall";
+	     columnNames[5 + nsplitoffset] = "Score Overall";
+
+
+	     return columnNames;
+	}
+
+
+       /**
+       * Static class for loading edge table added in data table to accomodate batch mode, but in future may want GUI to access this way
+       */
+        public static String[][] edgeTableTableData(DREM_Timeiohmm theTimeiohmm,DREM_Timeiohmm.Treenode ptr, int nchild, String[] columnNames)
+        {
+	    int numtf = theTimeiohmm.bindingData.regNames.length;
+	    int nsize = theTimeiohmm.bindingData.signedBindingValuesUnsorted.size();
+		
+             if (theTimeiohmm.bindingData.signedBindingValuesUnsorted
+				.contains(new Integer(0))) {
+			nsize--;
+	     }
+	     int numrows = numtf * nsize;
+
+	     boolean bsplit = ptr.numchildren >= 2;
+	     int nsplitoffset;
+	     if (bsplit) {
+			nsplitoffset = 1;
+
+	      } else {
+			nsplitoffset = 0;
+	     }
+
+	     String[][] tabledata = new String[numrows][columnNames.length];
+
+	     NumberFormat nf2 = NumberFormat.getInstance(Locale.ENGLISH);
+	     nf2.setMinimumFractionDigits(2);
+	     nf2.setMaximumFractionDigits(2);
+	     int nrowindex = 0;
+	     for (int nrow = 0; nrow < numtf; nrow++) {
+	        for (int nel = 0; nel < theTimeiohmm.bindingData.signedBindingValuesSorted.length; nel++) {
+		   if (theTimeiohmm.bindingData.signedBindingValuesSorted[nel] != 0) {
+		                        tabledata[nrowindex][0] = theTimeiohmm.bindingData.regNames[nrow]
+							+ " "
+							+ theTimeiohmm.bindingData.signedBindingValuesSorted[nel];
+					tabledata[nrowindex][1] = ""
+							+ theTimeiohmm.filteredClassifier.nBaseCount[nrow][theTimeiohmm.bindingData.signedBindingValuesSorted[nel]
+									+ theTimeiohmm.filteredClassifier.noffset];
+
+					tabledata[nrowindex][2 + nsplitoffset] = ""
+							+ ptr.ncountvals[nrow][nchild][nel];
+					tabledata[nrowindex][3 + nsplitoffset] = nf2
+							.format(ptr.dexpectEdgeFull[nchild][nrowindex]);
+					tabledata[nrowindex][4 + nsplitoffset] = nf2
+							.format(ptr.ddiffEdgeFull[nchild][nrowindex]);
+					tabledata[nrowindex][5 + nsplitoffset] = DREMGui_EdgeTable
+							.doubleToSz(ptr.dpvalEdgeFull[nchild][nrowindex]);
+
+					if (bsplit) {
+						tabledata[nrowindex][2] = ""
+								+ ptr.ncountTotals[nrow][nel];
+						tabledata[nrowindex][7] = nf2
+								.format(ptr.dexpectEdgeSplit[nchild][nrowindex]);
+						tabledata[nrowindex][8] = nf2
+								.format(ptr.ddiffEdgeSplit[nchild][nrowindex]);
+						tabledata[nrowindex][9] = DREMGui_EdgeTable
+								.doubleToSz(ptr.dpvalEdgeSplit[nchild][nrowindex]);
+						if (ptr.ncountTotals[nrow][nel] == 0) {
+							tabledata[nrowindex][10] = "0.00";
+						} else {
+							tabledata[nrowindex][10] = ""
+									+ nf2
+											.format(100
+													* (double) ptr.ncountvals[nrow][nchild][nel]
+													/ ptr.ncountTotals[nrow][nel]);
+						}
+					}
+					nrowindex++;
+		   }
+		}
+	     }
+
+	     return tabledata;
+	}
+
 
 	/**
 	 * Constructor - builds the table

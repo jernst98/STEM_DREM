@@ -693,9 +693,19 @@ public final class DREM_FastLogistic2 {
 			}
 		}
 		if (Double.isNaN(g[nel])) {
+		    if (nel == 0)
+		    {
+			//added in 2.0.6 to avoid out of bounds exception
+			System.out.println("computeG\t" + g[nel] + "\t" + dcoeff[nel]
+					+ "\t"  + "-\t" + dridge
+					+ "\t" + nel + "\t" + bnew + "\t" + bfirsttime);
+		    }
+		    else
+		    {
 			System.out.println("computeG\t" + g[nel] + "\t" + dcoeff[nel]
 					+ "\t" + (dcoeff[nel - 1] - doldcoeff) + "\t" + dridge
 					+ "\t" + nel + "\t" + bnew + "\t" + bfirsttime);
+		    }
 		}
 	}
 
