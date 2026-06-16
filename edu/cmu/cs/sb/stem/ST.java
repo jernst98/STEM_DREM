@@ -40,7 +40,8 @@ public class ST extends JFrame implements ActionListener
     static Object xreflock = new Object();
     JPanel pcluster;	
 	   
-    static String EBIURL = "ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/";
+    static String EBIURL = "https://ftp.ebi.ac.uk/pub/databases/GO/goa/";
+	// "ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/";
     static String szCompareDEF = "";
     static Vector vRepeatCompareDEF = new Vector();
     static int nCompareMinGenesDEF = 5;
@@ -4132,7 +4133,7 @@ public class ST extends JFrame implements ActionListener
        }
        else if (esource == infoButton)
        {
-           String szMessage = "This is version 1.3.14 of the Short Time-series Expression Miner (STEM).\n\n"+
+           String szMessage = "This is version 1.3.15 of the Short Time-series Expression Miner (STEM).\n\n"+
                        "The Short Time-series Expression Miner (STEM) was developed by Jason Ernst, "+
                        "Dima Patek, and Ziv Bar-Joseph. " +
                        "Any questions or bugs found should "+
@@ -5047,7 +5048,7 @@ public class ST extends JFrame implements ActionListener
                      "use a species specific cross-reference file "+
                      "provided by the European Bioinformatics Institute (EBI) "+
                      "available from "+
-                     "ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/.\n\nNote that leaving the cross-reference field blank "+
+                     "https://ftp.ebi.ac.uk/pub/databases/GO/goa/.\n\nNote that leaving the cross-reference field blank "+
 	      "under 'User Provided' is equivalent to selecting 'No cross references'.";                   
 	  Util.renderDialog(this,szMessage,50,100);
       }
@@ -5062,12 +5063,12 @@ public class ST extends JFrame implements ActionListener
                       "https://current.geneontology.org/annotations/ unless it is "+
 	      //"ftp://ftp.geneontology.org/go/gene-associations/ unless it is "+
                       "an EBI data source in which case it will be downloaded from "+
-                      "ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/.\n\n"+
+                      "https://ftp.ebi.ac.uk/pub/databases/GO/goa/.\n\n"+
                       "*The 'Cross References' file corresponds to the file under the 'Cross References File' text "+
                       "box, this field is only enabled if the Annotation Source is an EBI species for which "+
                       "a cross reference file is provided.  If the cross reference file is not present locally "+
                       "on the computer it must be downloaded. Cross reference files are downloaded from "+
-                      "ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/.\n\n"+
+                      "https://ftp.ebi.ac.uk/pub/databases/GO/goa/.\n\n"+
                       "*The 'Locations' checkbox corresponds to the data for the file under "+
                       "'Gene Location Source' which is obtained from http://www.biomart.org/biomart/martservice "+
                       "(NOTE: as of v1.3.9 automatic downloads of Gene Locations has been removed since the service is not working).\n\n"+

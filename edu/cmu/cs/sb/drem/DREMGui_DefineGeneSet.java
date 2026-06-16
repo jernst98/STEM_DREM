@@ -561,7 +561,7 @@ public class DREMGui_DefineGeneSet extends JPanel implements ItemListener,
 			}
 		}
 
-		tms = new TableModelSetST(tabledata, columnNames, tga);
+		tms = new TableModelSetST(tabledata, columnNames, tga, 2);//editable column is 2 - update in 2.0.7
 
 		sorter = new TableSorter(tms);
 		if (btrue) {

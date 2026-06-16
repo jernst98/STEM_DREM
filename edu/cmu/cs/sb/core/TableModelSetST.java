@@ -27,6 +27,11 @@ public class TableModelSetST extends AbstractTableModel
    GoAnnotations tga;
 
     /**
+     * column that should be editable
+     */
+    int neditableCOL = 1;
+
+    /**
      *Returns the Class type of column c
      */
    public Class getColumnClass(int c) 
@@ -39,7 +44,7 @@ public class TableModelSetST extends AbstractTableModel
     */
    public boolean isCellEditable(int rowIndex, int ColumnIndex)
    {
-      return (ColumnIndex == 1);
+      return (ColumnIndex == neditableCOL);
    }
 
     /**
@@ -50,6 +55,18 @@ public class TableModelSetST extends AbstractTableModel
       this.columnNames = columnNames;
       this.data = data;
       this.tga = tga;
+   }
+
+
+    /**
+     *Initializes the table model with the data, columnNames, and tga parameters
+     */
+    public TableModelSetST(Object[][] data, String[] columnNames,GoAnnotations tga, int neditableCOL)
+   {
+      this.columnNames = columnNames;
+      this.data = data;
+      this.tga = tga;
+      this.neditableCOL = neditableCOL;
    }
 
     /**

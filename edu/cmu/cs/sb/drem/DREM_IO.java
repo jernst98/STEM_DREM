@@ -37,7 +37,8 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 	boolean[] bexception = new boolean[FILETYPES];
 	int nexceptions;
 	static boolean bdisplaycurrent = false;
-	static String EBIURL = "ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/";
+        static String EBIURL = "https://ftp.ebi.ac.uk/pub/databases/GO/goa/";
+                               // "ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/";
 	static String szDefaultFile = "";
 
 	// Main
@@ -2811,7 +2812,7 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 			};
 			(new Thread(clusterrun)).start();
 		} else if (esource == infoButton) {
-			String szMessage = "This is Version 2.0.6 of the Dynamic Regulatory Events Miner (DREM).\n\n"
+			String szMessage = "This is Version 2.0.7 of the Dynamic Regulatory Events Miner (DREM).\n\n"
 					+ "The Dynamic Regulatory Events Miner (DREM) was developed by Jason Ernst "
 					+ "in collaboration with Ziv Bar-Joseph and extended by William E. Devanny, Anthony Gitter and Marcel H. Schulz.\n"
 					+ "Any questions or bugs found should "
@@ -3653,7 +3654,7 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 					+ "use an organism specific cross-reference file "
 					+ "provided by the European Bioinformatics Institute (EBI) "
 					+ "available from "
-					+ "ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/.\n\nNote that leaving the cross-reference field blank "
+					+ "https://ftp.ebi.ac.uk/pub/databases/GO/goa/.\n\nNote that leaving the cross-reference field blank "
 					+ "under 'User Provided' is equivalent to selecting 'No cross references'.";
 			Util.renderDialog(theOptions, szMessage, 50, 100);
 		} else if (esource == downloadlistgoHButton) {
@@ -3665,12 +3666,12 @@ public class DREM_IO extends JFrame implements ActionListener, ChangeListener {
 					+ "Gene annotation files are downloaded from "
 					+ "https://current.geneontology.org/annotations/ unless it is "
 					+ "an EBI data source in which case it will be downloaded from "
-					+ "ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/.\n\n"
+					+ "https://ftp.ebi.ac.uk/pub/databases/GO/goa/.\n\n"
 					+ "*The 'Cross References' file corresponds to the file under the 'Cross References File' text "
 					+ "box, this field is only enabled if the Annotation Source is an EBI organism for which "
 					+ "a cross reference file is provided.  If the cross reference file is not present locally "
 					+ "on the computer it must be downloaded. Cross reference files are downloaded from "
-					+ "ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/.\n\n"
+					+ "https://ftp.ebi.ac.uk/pub/databases/GO/goa/.\n\n"
 					+ "*The 'Ontology' checkbox corresponds to the gene "
 					+ "ontology specified in the go-basic.obo file.  It must be present if a non-user provided "
 					+ "annotation source is selected, otherwise an attempt to download the file from "

@@ -1,3 +1,7 @@
+6/15/2025 Version 2.0.7 Released
+* Updated the EBI annotations from being ftp based to being https based to fix connection problems
+* Fixed bug with the select gene set not allowing interface selections
+
 3/8/2026 Version 2.0.6 Released
 * Updated the set of integrated GO annotations available in DREM
 * Fixed broken download links associated with some GO annotations and the Gene Ontology file
